@@ -9,6 +9,8 @@ public class MushroomFarmController : MonoBehaviour, IFarmUnit
     public int farmLevel;
     public bool isUnlocked;
 
+    
+
     public void Initialize(string _name, int _index, int _level, bool _isUnlocked)
     {
         farmName = _name;
@@ -19,7 +21,11 @@ public class MushroomFarmController : MonoBehaviour, IFarmUnit
 
     public void Interact()
     {
-        Debug.Log("interact with player mushroom farm");
+        Debug.Log("interact with" + farmName);
+    }
+    public void ExitInteractField()
+    {
+        Debug.Log("no interact with" + farmName);
     }
 
 }

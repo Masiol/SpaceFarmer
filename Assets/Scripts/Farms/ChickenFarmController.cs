@@ -21,4 +21,8 @@ public class ChickenFarmController : MonoBehaviour, IFarmUnit
     {
         Debug.Log("interact with player chicken farm");
     }
+    public void ExitInteractField()
+    {
+        Debug.Log("no interact with" + farmName);
+    }
 }

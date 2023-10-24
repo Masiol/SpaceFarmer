@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IFarmUnit
+public interface IUnit
 {
-    void Interact();
+    //bool Interact();
 }
