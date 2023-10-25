@@ -9,6 +9,15 @@ public class FarmData
     public int farmLevel;
     public int farmIndex;
     public bool isUnlocked;
+
+    public enum FarmState
+    {
+        Undefined,
+        Unlocked,
+        Unlockable,
+        Locked
+    }
+    public FarmState farmState;
 }
 
 public class FarmManager : MonoBehaviour
@@ -17,13 +26,19 @@ public class FarmManager : MonoBehaviour
 
     private void Start()
     {
+        SetStateFarms();
         InitializeFarms(farms);
     }
-
+    public void SetStateFarms()
+    {
+        FarmStateController farmStateController = new FarmStateController();
+        farmStateController.SetState();
+    }
     private void InitializeFarms(List<FarmData> farms)
     {
         foreach (FarmData farm in farms)
         {
+
             IFarm ifarm = CreateFarmFromData(farm);
         }
     }
@@ -38,7 +53,14 @@ public class FarmManager : MonoBehaviour
             case 1:
                 farm = new ChickenFarm(data);
                 break;
+            case 2:
+                farm = new TomatoFarm(data);
+                break;
+            case 3:
+                farm = new CowFarm(data);
+                break;
         }
         return farm;
     }
 }
+

@@ -12,12 +12,15 @@ public class Farm : IFarm
 
     public bool IsUnlocked { get; protected set; }
 
-    public Farm(string name, int index, int farmLevel, bool isUnlocked)
+    public FarmData.FarmState FarmState { get; protected set; }
+
+    public Farm(string name, int index, int farmLevel, bool isUnlocked, FarmData.FarmState state)
     {
         FarmName = name;
         FarmIndex = index;
         FarmLevel = farmLevel;
         IsUnlocked = isUnlocked;
+        FarmState = state;
     }
     public void Unlock()
     {
