@@ -6,4 +6,10 @@ public interface IFarmUnit
 {
     void Interact();
     void ExitInteractField();
+
+    void UpdateFarmState();
+
+    void Unlock();
+
+    int GetPrice();
 }

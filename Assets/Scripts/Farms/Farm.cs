@@ -9,27 +9,20 @@ public class Farm : IFarm
     public int FarmLevel { get; protected set; }
 
     public int FarmIndex { get; protected set; }
+    
+    public int Price { get; protected set; }
 
     public bool IsUnlocked { get; protected set; }
-
     public FarmData.FarmState FarmState { get; protected set; }
 
-    public Farm(string name, int index, int farmLevel, bool isUnlocked, FarmData.FarmState state)
+    public Farm(string name, int index, int farmLevel, int price, bool isUnlocked, FarmData.FarmState state)
     {
         FarmName = name;
         FarmIndex = index;
         FarmLevel = farmLevel;
+        Price = price;
         IsUnlocked = isUnlocked;
         FarmState = state;
     }
-    public void Unlock()
-    {
-        Debug.Log("Unlock farm");
-    }
 
-    public void Upgrade()
-    {
-        FarmLevel++;
-        Debug.Log(FarmLevel);
-    }
 }

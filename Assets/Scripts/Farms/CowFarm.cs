@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CowFarm : Farm
 {
-    public CowFarm(FarmData data) : base(data.farmName, data.farmIndex, data.farmLevel, data.isUnlocked, data.farmState)
+    public CowFarm(FarmData data) : base(data.farmName, data.farmIndex, data.farmLevel, data.price, data.isUnlocked, data.farmState)
     {
-        GameObject.FindObjectOfType<CowFarmController>().Initialize(data.farmName, data.farmIndex, data.farmLevel, data.isUnlocked, data.farmState);
-    }
+        GameObject.FindObjectOfType<CowFarmController>().Initialize(data.farmName, data.farmIndex, data.farmLevel,data.price, data.isUnlocked, data.farmState);
+    }   
 }

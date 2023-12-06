@@ -8,6 +8,7 @@ public class FarmData
     public string farmName;
     public int farmLevel;
     public int farmIndex;
+    public int price;
     public bool isUnlocked;
 
     public enum FarmState
@@ -22,13 +23,33 @@ public class FarmData
 
 public class FarmManager : MonoBehaviour
 {
+    public static FarmManager Instance { get; private set; }
     public List<FarmData> farms = new List<FarmData>();
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
+    {
+        Initialize();
+    }
+
+    public void Initialize()
     {
         SetStateFarms();
         InitializeFarms(farms);
     }
+
     public void SetStateFarms()
     {
         FarmStateController farmStateController = new FarmStateController();
@@ -38,7 +59,6 @@ public class FarmManager : MonoBehaviour
     {
         foreach (FarmData farm in farms)
         {
-
             IFarm ifarm = CreateFarmFromData(farm);
         }
     }
@@ -59,8 +79,10 @@ public class FarmManager : MonoBehaviour
             case 3:
                 farm = new CowFarm(data);
                 break;
+               
         }
         return farm;
     }
+    
 }
 
