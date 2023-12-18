@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RotateCanvasToCamera : MonoBehaviour
+public class RotateObjectToCamera : MonoBehaviour
 {
     private Camera mainCamera;
 

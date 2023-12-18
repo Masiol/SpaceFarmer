@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerMoneyManager : MonoBehaviour
 {
     public static PlayerMoneyManager Instance { get; private set; }
 
     public int startMoneyPlayer;
-    [SerializeField] private int playerMoneyAmount { get; set; }
+    private int playerMoneyAmount { get; set; }
+
+    public TextMeshProUGUI playerMoney;
 
     private void Awake()
     {
@@ -29,9 +33,14 @@ public class PlayerMoneyManager : MonoBehaviour
     public void SetAmount(int amount)
     {
         playerMoneyAmount += amount;
+        UpdateAmountVisual();
     }
     public int GetAmount()
     {
         return playerMoneyAmount;
+    }
+    private void UpdateAmountVisual()
+    {
+        playerMoney.text = playerMoneyAmount.ToString();
     }
 }

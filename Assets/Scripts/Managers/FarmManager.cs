@@ -20,12 +20,10 @@ public class FarmData
     }
     public FarmState farmState;
 }
-
 public class FarmManager : MonoBehaviour
 {
     public static FarmManager Instance { get; private set; }
     public List<FarmData> farms = new List<FarmData>();
-
     private void Awake()
     {
         if (Instance == null)

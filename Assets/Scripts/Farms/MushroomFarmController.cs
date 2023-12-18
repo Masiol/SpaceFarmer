@@ -8,7 +8,6 @@ public class MushroomFarmController : MonoBehaviour, IFarmUnit
     public string farmName;
     public int farmIndex;
     public int farmLevel;
-    public Sprite farmImage;
     public int price;
     public bool isUnlocked;
     public FarmData.FarmState FarmState;
@@ -18,13 +17,9 @@ public class MushroomFarmController : MonoBehaviour, IFarmUnit
     public GameObject VisualPartAfterUnlock;
     public GameObject ScalableElementFarm;
 
-    
-
-    [Header("Set Money Multiplier")]
-    [Min(0.1f)]
-    [SerializeField] private float multiplierMoney;
-
+    [SerializeField] private FarmIncomePerLevel farmIncome;
     private FarmProduce farmProduce;
+
     public void Initialize(string _name, int _index, int _level,int _price, bool _isUnlocked, FarmData.FarmState state)
     {
         farmName = _name;
@@ -103,6 +98,8 @@ public class MushroomFarmController : MonoBehaviour, IFarmUnit
         FarmManager.Instance.farms[farmIndex].isUnlocked = true;
         FarmManager.Instance.farms[farmIndex].farmState = FarmData.FarmState.Unlocked;
         FarmManager.Instance.Initialize();
+
+        PlayerMoneyManager.Instance.SetAmount(-price);
         InitializeFarmProduce();
     }
 
@@ -113,11 +110,10 @@ public class MushroomFarmController : MonoBehaviour, IFarmUnit
             FarmProduce farm = new FarmProduce();
             farm = farmProduce;
             farmProduce = gameObject.AddComponent<FarmProduce>();
-            farmProduce.Initialize(this, farmIndex, farmName, multiplierMoney, farmLevel);
+            farmProduce.Initialize(this, farmIndex, farmName, farmLevel, farmIncome);
 
         }
     }
-
     public int GetPrice()
     {
         return price;

@@ -2,7 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Collections;
 
-public class MoneySpawner : MonoBehaviour
+public class MoneySpawner : MonoBehaviour, IParabolicMoveListener
 {
     public GameObject moneyPrefab;      
     private int repeatSpawnMoney = 6;      
@@ -29,6 +29,11 @@ public class MoneySpawner : MonoBehaviour
     {
         var go = Instantiate(moneyPrefab, transform.position, Quaternion.Euler(spawnRotation));
         go.AddComponent<ParabolicMove>();
-        go.GetComponent<ParabolicMove>().MoveOnParabola(transform, endPoint);
+        go.GetComponent<ParabolicMove>().MoveOnParabola(transform, endPoint, this);
+    }
+
+    public void OnParabolicMoveComplete()
+    {
+        return;
     }
 }

@@ -15,6 +15,7 @@ public class RescaleFarmElement : MonoBehaviour
            .SetEase(ease).OnComplete(() =>
            {
                GetComponent<CollidersFarm>().EnableChildMeshColliders();
+               GetComponentInChildren<AnimationFarmGoods>().StartProcess();
            });
     }
 

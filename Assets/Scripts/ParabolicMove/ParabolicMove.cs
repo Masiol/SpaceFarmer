@@ -4,15 +4,20 @@ using DG.Tweening;
 public class ParabolicMove : MonoBehaviour
 {
     public float height = 2f;   
-    public float duration = 1f;  
-    public void MoveOnParabola(Transform startPoint, Transform endPoint)
+    public float duration = 1f;
+
+    private IParabolicMoveListener moveListener;
+    public void MoveOnParabola(Transform startPoint, Transform endPoint, IParabolicMoveListener parabolicMoveListener)
     {
+        moveListener = parabolicMoveListener;
+
         Vector3[] path = CalculateParabolaPoints(startPoint.position, endPoint.position, height, 0.1f);
 
         transform.DOPath(path, duration, PathType.CatmullRom)
             .SetEase(Ease.OutQuad).OnComplete(() =>
-            {
+            { 
                 Destroy(gameObject);
+                moveListener.OnParabolicMoveComplete();
             });
     }
 

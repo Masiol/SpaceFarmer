@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58784bfe97b348046bc26b4d6ec02a96, type: 3}
+  m_Name: MushroomFarm
+  m_EditorClassIdentifier: 
+  scalableItemPrefab: {fileID: 3943215814370218146, guid: ad7a76e60610a1e4f8bf666b8399bf97, type: 3}
+  timeBetweenNextScale: 2
+  timeScaleDuration: 3
+  maxScale: {x: 2.25, y: 2.25, z: 2.25}
