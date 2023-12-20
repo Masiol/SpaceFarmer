@@ -18,11 +18,8 @@ public class ChickenFarmController : MonoBehaviour, IFarmUnit
     public GameObject VisualPartAfterUnlock;
     public GameObject ScalableElementFarm;
 
-    [Header("Set Money Multiplier")]
-    [Min(0.1f)]
-    [SerializeField] private float multiplierMoney;
-
-    //private FarmProduce farmProduce;
+    [SerializeField] private FarmIncomePerLevel farmIncome;
+    private FarmProduce farmProduce;
 
     public void Initialize(string _name, int _index, int _level, int _price, bool _isUnlocked, FarmData.FarmState state)
     {
@@ -104,20 +101,20 @@ public class ChickenFarmController : MonoBehaviour, IFarmUnit
         FarmManager.Instance.farms[farmIndex].isUnlocked = true;
         FarmManager.Instance.farms[farmIndex].farmState = FarmData.FarmState.Unlocked;
         FarmManager.Instance.Initialize();
-        //InitializeFarmProduce();
+        InitializeFarmProduce();
     }
 
-   /* private void InitializeFarmProduce()
+    private void InitializeFarmProduce()
     {
         if (farmProduce == null)
         {
             FarmProduce farm = new FarmProduce();
             farm = farmProduce;
             farmProduce = gameObject.AddComponent<FarmProduce>();
-            farmProduce.Initialize(this, farmIndex, farmName, farmLevel);
+            farmProduce.Initialize(this, farmIndex, farmName, farmLevel, farmIncome);
 
         }
-    }*/
+    }
     public int GetPrice()
     {
         return price;

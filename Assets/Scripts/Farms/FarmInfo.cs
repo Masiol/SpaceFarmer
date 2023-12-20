@@ -9,5 +9,6 @@ public class FarmInfo : ScriptableObject
     public GameObject scalableItemPrefab;
     public float timeBetweenNextScale;
     public float timeScaleDuration;
+    public float timeBetweenNextSpawnObjects;
     public Vector3 maxScale;
 }

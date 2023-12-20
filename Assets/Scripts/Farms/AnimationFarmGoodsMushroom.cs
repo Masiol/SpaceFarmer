@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class AnimationFarmGoods : MonoBehaviour, IParabolicMoveListener
+public class AnimationFarmGoodsMushroom : MonoBehaviour, IParabolicMoveListener, IFarmBehaviour
 {
     private List<Transform> HoldersFarmItem = new List<Transform>();
     public List<Transform> itemsToScale = new List<Transform>();
@@ -29,7 +29,7 @@ public class AnimationFarmGoods : MonoBehaviour, IParabolicMoveListener
             HoldersFarmItem.Add(holder);
         }
     }
-    private void SpawnElements()
+    public void SpawnElements()
     {
         for (int i = 0; i < HoldersFarmItem.Count; i++)
         {
@@ -72,7 +72,7 @@ public class AnimationFarmGoods : MonoBehaviour, IParabolicMoveListener
         StartCoroutine(ScaleCoroutine());
     }
   
-    private void FloatingToPoint(Transform item)
+    public void FloatingToPoint(Transform item)
     {
         var go = Instantiate(item, item.transform.position, Quaternion.identity);
         go.transform.localScale = item.localScale / 2;

@@ -26,9 +26,9 @@ public class FarmIncomeUI : MonoBehaviour
 
 
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(go.transform.DOMoveY(position.y + 1.5f, 1.25f));
+        sequence.Append(go.transform.DOMoveY(position.y + 2.5f, 1.25f));
         sequence.Join(go.GetComponent<TextMeshPro>().DOFade(0, 1.25f));
-        //sequence.OnComplete(() => Destroy(go.gameObject));
+        sequence.OnComplete(() => Destroy(go.gameObject));
     }
 }
 
