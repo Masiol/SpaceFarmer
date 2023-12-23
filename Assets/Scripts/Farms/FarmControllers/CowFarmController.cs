@@ -75,4 +75,14 @@ public class CowFarmController : MonoBehaviour, IFarmUnit
     {
         return price;
     }
+
+    public string FarmName()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Interact(string currentFarmName)
+    {
+        throw new System.NotImplementedException();
+    }
 }

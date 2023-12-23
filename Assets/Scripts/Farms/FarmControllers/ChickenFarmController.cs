@@ -42,12 +42,13 @@ public class ChickenFarmController : MonoBehaviour, IFarmUnit
         Actions.MoneyFinishedAction += MoneyFinishedHandler;
     }
 
-    private void MoneyFinishedHandler()
+    private void MoneyFinishedHandler(string currentFarmName)
     {
-        Unlock();
+        if (currentFarmName == FarmName())
+            Unlock();
     }
 
-    public void Interact()
+    public void Interact(string currentFarmName)
     {
         if (FarmState == FarmData.FarmState.Unlocked)
         {
@@ -58,7 +59,7 @@ public class ChickenFarmController : MonoBehaviour, IFarmUnit
             int i = PlayerMoneyManager.Instance.GetAmount();
             if (i > price)
             {
-                PlayerFasade.instance.StartSpawnMoney(platformFarm.transform.GetChild(0));
+                PlayerFasade.instance.StartSpawnMoney(platformFarm.transform.GetChild(0), currentFarmName);
             }
         }
         else
@@ -101,6 +102,7 @@ public class ChickenFarmController : MonoBehaviour, IFarmUnit
         FarmManager.Instance.farms[farmIndex].isUnlocked = true;
         FarmManager.Instance.farms[farmIndex].farmState = FarmData.FarmState.Unlocked;
         FarmManager.Instance.Initialize();
+        PlayerMoneyManager.Instance.SetAmount(-price);
         InitializeFarmProduce();
     }
 
@@ -118,5 +120,10 @@ public class ChickenFarmController : MonoBehaviour, IFarmUnit
     public int GetPrice()
     {
         return price;
+    }
+
+    public string FarmName()
+    {
+        return farmName;
     }
 }

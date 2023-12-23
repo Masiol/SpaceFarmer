@@ -8,7 +8,8 @@ public class MushroomFarmController : MonoBehaviour, IFarmUnit
     public string farmName;
     public int farmIndex;
     public int farmLevel;
-    public int price;
+    public Sprite farmImage;
+    public int price { get; private set; }
     public bool isUnlocked;
     public FarmData.FarmState FarmState;
     public GameObject platformFarm;
@@ -40,12 +41,13 @@ public class MushroomFarmController : MonoBehaviour, IFarmUnit
         Actions.MoneyFinishedAction += MoneyFinishedHandler;
     }
 
-    private void MoneyFinishedHandler()
+    private void MoneyFinishedHandler(string currentFarmName)
     {
+        if(currentFarmName == FarmName())
         Unlock();
     }
 
-    public void Interact()
+    public void Interact(string currentFarmName)
     {
         if (FarmState == FarmData.FarmState.Unlocked)
         {
@@ -56,7 +58,7 @@ public class MushroomFarmController : MonoBehaviour, IFarmUnit
             int i = PlayerMoneyManager.Instance.GetAmount();
             if (i > price)
             {
-                PlayerFasade.instance.StartSpawnMoney(platformFarm.transform.GetChild(0));
+                PlayerFasade.instance.StartSpawnMoney(platformFarm.transform.GetChild(0), currentFarmName);
             }
         }
         else
@@ -117,6 +119,11 @@ public class MushroomFarmController : MonoBehaviour, IFarmUnit
     public int GetPrice()
     {
         return price;
+    }
+
+    public string FarmName()
+    {
+        return farmName;
     }
 }
 

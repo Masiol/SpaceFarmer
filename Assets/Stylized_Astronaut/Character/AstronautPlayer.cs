@@ -12,6 +12,8 @@ public class AstronautPlayer : MonoBehaviour, IUnit
 
     public FloatingJoystick joystick;
 
+    public string currentFarmNameInteracting;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -57,7 +59,9 @@ public class AstronautPlayer : MonoBehaviour, IUnit
     {
         if (other.gameObject.TryGetComponent(out IFarmUnit farm))
         {
-            farm.Interact();
+            currentFarmNameInteracting = farm.FarmName();
+            farm.Interact(currentFarmNameInteracting);
+            
         }
     }
 
@@ -66,6 +70,7 @@ public class AstronautPlayer : MonoBehaviour, IUnit
         if (other.gameObject.TryGetComponent(out IFarmUnit farm))
         {
             farm.ExitInteractField();
+            currentFarmNameInteracting = null;
         }
     }
 }

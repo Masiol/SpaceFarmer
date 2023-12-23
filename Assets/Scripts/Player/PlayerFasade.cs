@@ -15,8 +15,8 @@ public class PlayerFasade : MonoBehaviour
         instance = this;
     }
 
-    public void StartSpawnMoney(Transform EndPoint)
+    public void StartSpawnMoney(Transform EndPoint, string currentFarmName)
     {
-        moneySpawner.StartSpawn(EndPoint);
+        moneySpawner.StartSpawn(EndPoint, currentFarmName);
     }
 }

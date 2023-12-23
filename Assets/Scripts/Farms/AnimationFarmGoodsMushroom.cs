@@ -77,7 +77,7 @@ public class AnimationFarmGoodsMushroom : MonoBehaviour, IParabolicMoveListener,
         var go = Instantiate(item, item.transform.position, Quaternion.identity);
         go.transform.localScale = item.localScale / 2;
         go.gameObject.AddComponent<ParabolicMove>();
-        go.GetComponent<ParabolicMove>().MoveOnParabola(transform, endPoint, this);
+        go.GetComponent<ParabolicMove>().MoveOnParabola(item, endPoint, this);
     }
 
     public void OnParabolicMoveComplete()

@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class Actions : MonoBehaviour
 {
-    public static event Action MoneyFinishedAction;
+    public static event Action<string> MoneyFinishedAction;
 
-    public static void InvokeMoneyFinished()
+    public static void InvokeMoneyFinished(string currentFarmName)
     {
-        MoneyFinishedAction?.Invoke();
+        MoneyFinishedAction?.Invoke(currentFarmName);
     }
 }

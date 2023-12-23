@@ -16,7 +16,7 @@ public class FarmStateController
     {
         List<FarmData> farms = farmManager.farms;
         int highestUnlockedIndexFarm = GetHighestUnlockedIndexFarm();
-        int indexOfUnlockableFarm = highestUnlockedIndexFarm + 1;
+        int indexOfUnlockableFarm = highestUnlockedIndexFarm+1;
 
         for (int i = 0; i < farms.Count; i++)
         {

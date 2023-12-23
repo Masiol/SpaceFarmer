@@ -8,12 +8,19 @@ public class TomatoFarmController : MonoBehaviour, IFarmUnit
     public string farmName;
     public int farmIndex;
     public int farmLevel;
-    public int price;
+    public Sprite farmImage;
+    public int price { get; private set; }
     public bool isUnlocked;
     public FarmData.FarmState FarmState;
     public GameObject platformFarm;
-    public Material[] materials;
-    public void Initialize(string _name, int _index, int _level,int _price, bool _isUnlocked, FarmData.FarmState state)
+    [Space]
+    public GameObject VisualPartToUnlock;
+    public GameObject VisualPartAfterUnlock;
+    public GameObject ScalableElementFarm;
+
+    [SerializeField] private FarmIncomePerLevel farmIncome;
+    private FarmProduce farmProduce;
+    public void Initialize(string _name, int _index, int _level, int _price, bool _isUnlocked, FarmData.FarmState state)
     {
         farmName = _name;
         farmIndex = _index;
@@ -22,9 +29,24 @@ public class TomatoFarmController : MonoBehaviour, IFarmUnit
         isUnlocked = _isUnlocked;
         FarmState = state;
         UpdateFarmState();
+
+        if (isUnlocked)
+        {
+            InitializeFarmProduce();
+        }
+    }
+    private void OnEnable()
+    {
+        Actions.MoneyFinishedAction += MoneyFinishedHandler;
     }
 
-    public void Interact()
+    private void MoneyFinishedHandler(string currentFarmName )
+    {
+        if (currentFarmName == FarmName())
+            Unlock();
+    }
+
+    public void Interact(string currentFarmName)
     {
         if (FarmState == FarmData.FarmState.Unlocked)
         {
@@ -35,8 +57,7 @@ public class TomatoFarmController : MonoBehaviour, IFarmUnit
             int i = PlayerMoneyManager.Instance.GetAmount();
             if (i > price)
             {
-                PlayerMoneyManager.Instance.SetAmount(-price);
-                Unlock();
+                PlayerFasade.instance.StartSpawnMoney(platformFarm.transform.GetChild(0), currentFarmName);
             }
         }
         else
@@ -48,17 +69,28 @@ public class TomatoFarmController : MonoBehaviour, IFarmUnit
     }
     public void UpdateFarmState()
     {
-        Renderer renderer = platformFarm.GetComponent<Renderer>();
         switch (FarmState)
         {
             case FarmData.FarmState.Unlocked:
-                renderer.material = materials[0];
+                {
+                    //VisualPartAfterUnlock.gameObject.SetActive(true);
+                    ScalableElementFarm.gameObject.SetActive(true);
+                    VisualPartToUnlock.gameObject.SetActive(false);
+                }
                 break;
             case FarmData.FarmState.Unlockable:
-                renderer.material = materials[1];
+                {
+                    VisualPartToUnlock.gameObject.SetActive(true);
+                    ScalableElementFarm.gameObject.SetActive(false);
+                    // VisualPartAfterUnlock.gameObject.SetActive(false);
+                }
                 break;
             case FarmData.FarmState.Locked:
-                renderer.material = materials[2];
+                {
+                    // VisualPartAfterUnlock.gameObject.SetActive(false);
+                    VisualPartToUnlock.gameObject.SetActive(false);
+                    ScalableElementFarm.gameObject.SetActive(false);
+                }
                 break;
         }
     }
@@ -67,9 +99,31 @@ public class TomatoFarmController : MonoBehaviour, IFarmUnit
         FarmManager.Instance.farms[farmIndex].isUnlocked = true;
         FarmManager.Instance.farms[farmIndex].farmState = FarmData.FarmState.Unlocked;
         FarmManager.Instance.Initialize();
+
+        PlayerMoneyManager.Instance.SetAmount(-price);
+        InitializeFarmProduce();
+    }
+
+    private void InitializeFarmProduce()
+    {
+        if (farmProduce == null)
+        {
+            FarmProduce farm = new FarmProduce();
+            farm = farmProduce;
+            farmProduce = gameObject.AddComponent<FarmProduce>();
+            farmProduce.Initialize(this, farmIndex, farmName, farmLevel, farmIncome);
+
+        }
     }
     public int GetPrice()
     {
         return price;
     }
+
+    public string FarmName()
+    {
+        return farmName;
+    }
 }
+
+

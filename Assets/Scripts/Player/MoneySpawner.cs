@@ -9,12 +9,12 @@ public class MoneySpawner : MonoBehaviour, IParabolicMoveListener
     public float waitForNextSpawn = 0.1f;
     public Vector3 spawnRotation = new Vector3(-90f, 90f, 0f);
     private Transform endPoint;
-    public void StartSpawn(Transform endpoint)
+    public void StartSpawn(Transform endpoint, string currentFarmName)
     {
         endPoint = endpoint;
-        StartCoroutine(SpawnMoneyRoutine());
+        StartCoroutine(SpawnMoneyRoutine(currentFarmName));
     }
-    private IEnumerator SpawnMoneyRoutine()
+    private IEnumerator SpawnMoneyRoutine(string currentFarmName)
     {
         for (int i = 0; i < repeatSpawnMoney; i++)
         {
@@ -22,7 +22,7 @@ public class MoneySpawner : MonoBehaviour, IParabolicMoveListener
 
             yield return new WaitForSeconds(waitForNextSpawn);
         }
-        Actions.InvokeMoneyFinished();
+        Actions.InvokeMoneyFinished(currentFarmName);
 
     }
     private void SendMoneyToPoint(Transform endPoint)

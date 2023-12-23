@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IFarmUnit
 {
-    void Interact();
+    void Interact(string currentFarmName);
     void ExitInteractField();
 
     void UpdateFarmState();
@@ -12,4 +12,6 @@ public interface IFarmUnit
     void Unlock();
 
     int GetPrice();
+
+    string FarmName();
 }
