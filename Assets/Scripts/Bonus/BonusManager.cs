@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class BonusManager : MonoBehaviour
 {
-    public Bonus CreatedBonus { get; private set; }
+    public Bonus CreatedBonus;
     public void CreateBonus(BonusData bonusdata)
     {
         BonusBuilder bonusBuilder = new BonusBuilder()
             .SetSprite(bonusdata.sprite)
-            .SetMultiplierStrategy(GetStrategy(bonusdata.SetMultiplier.ToString()))
+            .SetBonusType(bonusdata.SetBonusType)
             .SetDuration(bonusdata.duration)
             .SetPrefab(bonusdata.prefab);
 
+        if(bonusdata.SetBonusType == BonusData.BonusType.MultiplierMoney)
+        {
+            bonusBuilder.SetMultiplierStrategy(GetStrategy(bonusdata.SetMultiplier.ToString()));
+        }
+        else if(bonusdata.SetBonusType == BonusData.BonusType.FasterProduce)
+        {
+            bonusBuilder.SetFasterProduce(bonusdata.SetFasterProduce);
+        }
+
         CreatedBonus = bonusBuilder.Build();
         GameObject bonusObject = Instantiate(bonusdata.prefab, Vector3.zero, Quaternion.identity);
-        UIBonus ui = new UIBonus();
+        UIBonus ui = FindObjectOfType<UIBonus>();
         ui.SetBonusOnScreen(CreatedBonus);
     }
 

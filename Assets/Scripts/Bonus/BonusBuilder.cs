@@ -9,7 +9,7 @@ public class BonusBuilder
 
     public BonusBuilder()
     {
-        bonus = new Bonus(null, null, 1, null);
+        bonus = new Bonus(null, null, 0, 0, 1, null);
     }
 
     public BonusBuilder SetSprite(Sprite sprite)
@@ -21,6 +21,18 @@ public class BonusBuilder
     public BonusBuilder SetMultiplierStrategy(IMultiplierStrategy multiplierStrategy)
     {
         bonus.MultiplierStrategy = multiplierStrategy;
+        return this;
+    }
+
+    public BonusBuilder SetBonusType(BonusData.BonusType bonusType)
+    {
+        bonus.BonusType = bonusType;
+        return this;
+    }
+
+    public BonusBuilder SetFasterProduce(BonusData.FasterProduce fasterProduce)
+    {
+        bonus.FasterProduce = fasterProduce;
         return this;
     }
 

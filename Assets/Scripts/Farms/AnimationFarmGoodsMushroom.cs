@@ -44,7 +44,8 @@ public class AnimationFarmGoodsMushroom : MonoBehaviour, IParabolicMoveListener,
     private IEnumerator ScaleCoroutine()
     {
         float elapsedTime = 0f;
-        float duration = farmInfo.timeScaleDuration;
+        float duration = farmInfo.timeScaleDuration * GetActiveBonus();
+        Debug.Log(farmInfo.timeScaleDuration * GetActiveBonus());
 
         while (elapsedTime < duration)
         {
@@ -54,7 +55,7 @@ public class AnimationFarmGoodsMushroom : MonoBehaviour, IParabolicMoveListener,
             }
 
             elapsedTime += Time.deltaTime;
-            yield return null; // Wait for the next frame
+            yield return null;
         }
         for (int i = 0; i < itemsToScale.Count; i++)
         {
@@ -62,13 +63,11 @@ public class AnimationFarmGoodsMushroom : MonoBehaviour, IParabolicMoveListener,
             itemsToScale[i].localScale = Vector3.zero;
         }
 
-        // Scaling complete, send an event or perform any other action
-        Debug.Log("Scaling Complete!");
+        //Debug.Log("Scaling Complete!");
 
-        // Wait for some time before resetting the scale
-        yield return new WaitForSeconds(farmInfo.timeBetweenNextScale);
+        yield return new WaitForSeconds(farmInfo.timeBetweenNextScale * GetActiveBonus());
+      //  Debug.Log(farmInfo.timeBetweenNextScale * GetActiveBonus());
 
-        // Restart the coroutine for continuous scaling
         StartCoroutine(ScaleCoroutine());
     }
   
@@ -89,5 +88,15 @@ public class AnimationFarmGoodsMushroom : MonoBehaviour, IParabolicMoveListener,
             currentGoodsFarmFloatingToDestinationPoint = 0;
         }
 
+    }
+    private float GetActiveBonus()
+    {
+        ActiveBonus activeBonus = FindObjectOfType<ActiveBonus>();
+        if (activeBonus != null)
+        {
+            return 1 - (float)FasterProduceHelper.GetPercentage(activeBonus.GetFasterProduce());
+        }
+        else
+            return 1;
     }
 }

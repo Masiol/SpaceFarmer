@@ -9,10 +9,16 @@ public class Bonus : MonoBehaviour
     public float Duration { get; set; }
     public GameObject Prefab;
 
-    public Bonus(Sprite sprite, IMultiplierStrategy multiplierStrategy, float duration, GameObject prefab)
+    public BonusData.BonusType BonusType;
+
+    public BonusData.FasterProduce FasterProduce;
+
+    public Bonus(Sprite sprite, IMultiplierStrategy multiplierStrategy, BonusData.BonusType bonusType, BonusData.FasterProduce fasterProduce, float duration, GameObject prefab)
     {
         BonusSprite = sprite;
         MultiplierStrategy = multiplierStrategy;
+        BonusType = bonusType;
+        FasterProduce = fasterProduce;
         Duration = duration;
         Prefab = prefab;
     }

@@ -65,5 +65,16 @@ public class AnimationFarmGoodsChicken : MonoBehaviour, IParabolicMoveListener, 
         return farmInfo;
     }
 
-   
+    public float GetActiveBonus()
+    {
+        ActiveBonus activeBonus = FindObjectOfType<ActiveBonus>();
+        if (activeBonus != null)
+        {
+            return 1 - (float)FasterProduceHelper.GetPercentage(activeBonus.GetFasterProduce());
+        }
+
+        return 1;
+    }
+
+
 }

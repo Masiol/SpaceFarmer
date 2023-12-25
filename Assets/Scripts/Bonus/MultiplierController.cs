@@ -15,7 +15,7 @@ public class MultiplierController
     {
         public float ApplyMultiplier(float amount)
         {
-            return amount * 4;
+            return amount * 3;
         }
     }
     public class x5Multiplier : IMultiplierStrategy

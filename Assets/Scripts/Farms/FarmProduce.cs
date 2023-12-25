@@ -31,7 +31,18 @@ public class FarmProduce: MonoBehaviour, IFarmProduce
     {
         currentFarmProduce += farmIncomePerLevel.farmIncomePerLevel[farmLevel];
         GetComponent<FarmIncomeUI>().StartAnimation(farmIncomePerLevel.farmIncomePerLevel[farmLevel]);
-        PlayerMoneyManager.Instance.SetAmount(farmIncomePerLevel.farmIncomePerLevel[farmLevel]);
+        PlayerMoneyManager.Instance.SetAmount(farmIncomePerLevel.farmIncomePerLevel[farmLevel] * (int)GetActiveBonus());
+    }
+
+    private float GetActiveBonus()
+    {
+        ActiveBonus activeBonus = FindObjectOfType<ActiveBonus>();
+        if (activeBonus != null)
+        {
+            return activeBonus.GetCurrentMultiplier();
+        }
+        else
+            return 1;
     }
 
 }

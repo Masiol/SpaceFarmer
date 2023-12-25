@@ -6,6 +6,8 @@ TagManager:
   tags:
   - SpawnUIPoint
   - Money
+  - BonusBorder
+  - BonusIcon
   layers:
   - Default
   - TransparentFX
