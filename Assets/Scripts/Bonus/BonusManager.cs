@@ -24,6 +24,8 @@ public class BonusManager : MonoBehaviour
 
         CreatedBonus = bonusBuilder.Build();
         GameObject bonusObject = Instantiate(bonusdata.prefab, Vector3.zero, Quaternion.identity);
+        bonusObject.AddComponent<GameObjectBonus>();
+        bonusObject.GetComponent<GameObjectBonus>().Initialize(bonusdata.duration);
         UIBonus ui = FindObjectOfType<UIBonus>();
         ui.SetBonusOnScreen(CreatedBonus);
     }
