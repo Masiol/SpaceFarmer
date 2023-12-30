@@ -13,5 +13,9 @@ public interface IFarmUnit
 
     int GetPrice();
 
-    string FarmName();
+    int GetLevel();
+
+    string GetFarmName();
+
+    void Upgrade();
 }

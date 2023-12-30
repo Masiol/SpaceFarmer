@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
+using System.Linq;
 
-public class ChickenFarmController : MonoBehaviour, IFarmUnit
+public class FarmController : MonoBehaviour, IFarmUnit
 {
     public string farmName;
     public int farmIndex;
@@ -20,6 +21,12 @@ public class ChickenFarmController : MonoBehaviour, IFarmUnit
 
     [SerializeField] private FarmIncomePerLevel farmIncome;
     private FarmProduce farmProduce;
+    private FarmData data;
+
+    public FarmController(FarmData data)
+    {
+        this.data = data;
+    }
 
     public void Initialize(string _name, int _index, int _level, int _price, bool _isUnlocked, FarmData.FarmState state)
     {
@@ -44,7 +51,7 @@ public class ChickenFarmController : MonoBehaviour, IFarmUnit
 
     private void MoneyFinishedHandler(string currentFarmName)
     {
-        if (currentFarmName == FarmName())
+        if (currentFarmName == GetFarmName())
             Unlock();
     }
 
@@ -76,7 +83,7 @@ public class ChickenFarmController : MonoBehaviour, IFarmUnit
         {
             case FarmData.FarmState.Unlocked:
                 {
-                    //VisualPartAfterUnlock.gameObject.SetActive(true);
+                    VisualPartAfterUnlock.gameObject.SetActive(true);
                     ScalableElementFarm.gameObject.SetActive(true);
                     VisualPartToUnlock.gameObject.SetActive(false);
                 }
@@ -85,12 +92,12 @@ public class ChickenFarmController : MonoBehaviour, IFarmUnit
                 {
                     VisualPartToUnlock.gameObject.SetActive(true);
                     ScalableElementFarm.gameObject.SetActive(false);
-                    // VisualPartAfterUnlock.gameObject.SetActive(false);
+                    VisualPartAfterUnlock.gameObject.SetActive(false);
                 }
                 break;
             case FarmData.FarmState.Locked:
                 {
-                    // VisualPartAfterUnlock.gameObject.SetActive(false);
+                    VisualPartAfterUnlock.gameObject.SetActive(false);
                     VisualPartToUnlock.gameObject.SetActive(false);
                     ScalableElementFarm.gameObject.SetActive(false);
                 }
@@ -116,14 +123,29 @@ public class ChickenFarmController : MonoBehaviour, IFarmUnit
             farmProduce.Initialize(this, farmIndex, farmName, farmLevel, farmIncome);
 
         }
-    }
+    } 
     public int GetPrice()
     {
         return price;
     }
+    public int GetLevel()
+    {
+        return farmLevel;
+    }
 
-    public string FarmName()
+    public string GetFarmName()
     {
         return farmName;
     }
+    public void Upgrade()
+    {
+        FarmData farm = FarmManager.Instance.farms.FirstOrDefault(f => f.farmName == GetFarmName());
+        if (farm != null)
+        {
+            farm.farmLevel += 1;
+        }
+        this.farmLevel += 1;
+        GetComponent<FarmProduce>().UpgradeProduce();
+    }
+   
 }

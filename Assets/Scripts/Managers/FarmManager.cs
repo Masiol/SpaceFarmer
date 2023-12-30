@@ -61,26 +61,24 @@ public class FarmManager : MonoBehaviour
         }
     }
     private IFarm CreateFarmFromData(FarmData data)
-    {
-        IFarm farm = null;
-        switch (data.farmIndex)
         {
-            case 0:
-                farm = new MushroomFarm(data);
-                break;
-            case 1:
-                farm = new ChickenFarm(data);
-                break;
-            case 2:
-                farm = new TomatoFarm(data);
-                break;
-            case 3:
-                farm = new CowFarm(data);
-                break;
-               
-        }
-        return farm;
-    }
-    
-}
+            IFarm farm = null;
+            switch (data.farmIndex)
+            {
+                case 0:
+                    farm = new MushroomFarm(data);
+                    break;
+                case 1:
+                    farm = new ChickenFarm(data);
+                    break;
+                case 2:
+                    farm = new TomatoFarm(data);
+                    break;
+                case 3:
+                    farm = new CowFarm(data);
+                    break;
 
+            }
+            return farm;
+        }
+    }

@@ -59,7 +59,7 @@ public class AstronautPlayer : MonoBehaviour, IUnit
     {
         if (other.gameObject.TryGetComponent(out IFarmUnit farm))
         {
-            currentFarmNameInteracting = farm.FarmName();
+            currentFarmNameInteracting = farm.GetFarmName();
             farm.Interact(currentFarmNameInteracting);
             
         }

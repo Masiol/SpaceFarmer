@@ -14,7 +14,7 @@ public class RotateObjectToCamera : MonoBehaviour
         if (mainCamera != null)
         {
             Vector3 directionToCamera = mainCamera.transform.position - transform.position;
-            directionToCamera.y = 25f;
+            directionToCamera.y = 15f;
             Quaternion rotationToCamera = Quaternion.LookRotation(directionToCamera);
             transform.rotation = rotationToCamera;
         }

@@ -22,9 +22,9 @@ public class FarmProduce: MonoBehaviour, IFarmProduce
         gameObject.GetComponent<FarmIncomeUI>().Initialize();
     }
 
-    public void UpgradeProduce(IFarmUnit farm, int farmLevel)
+    public void UpgradeProduce()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public void Income()
