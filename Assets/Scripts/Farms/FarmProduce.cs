@@ -10,28 +10,23 @@ public class FarmProduce: MonoBehaviour, IFarmProduce
     [SerializeField] private string farmName;
     private int farmLevel;
     public int currentFarmProduce;
-    private FarmIncomePerLevel farmIncomePerLevel;
+    private FarmValuesPerLevel farmValuesPerLevel;
 
-    public void Initialize(IFarmUnit _farm, int _farmID, string _farmName, int _farmLevel, FarmIncomePerLevel _farmIncomePerLevel)
+    public void Initialize(IFarmUnit _farm, int _farmID, string _farmName, int _farmLevel, FarmValuesPerLevel _farmValuesPerLevel)
     {
         farmUnit = _farm;
         farmID = _farmID;
         farmName = _farmName;
         farmLevel = _farmLevel;
-        farmIncomePerLevel = _farmIncomePerLevel;
+        farmValuesPerLevel = _farmValuesPerLevel;
         gameObject.GetComponent<FarmIncomeUI>().Initialize();
-    }
-
-    public void UpgradeProduce()
-    {
-
     }
 
     public void Income()
     {
-        currentFarmProduce += farmIncomePerLevel.farmIncomePerLevel[farmLevel];
-        GetComponent<FarmIncomeUI>().StartAnimation(farmIncomePerLevel.farmIncomePerLevel[farmLevel]);
-        PlayerMoneyManager.Instance.SetAmount(farmIncomePerLevel.farmIncomePerLevel[farmLevel] * (int)GetActiveBonus());
+        currentFarmProduce += farmValuesPerLevel.farmIncomePerLevel[farmLevel];
+        GetComponent<FarmIncomeUI>().StartAnimation(farmValuesPerLevel.farmIncomePerLevel[farmLevel]);
+        PlayerMoneyManager.Instance.SetAmount(farmValuesPerLevel.farmIncomePerLevel[farmLevel] * (int)GetActiveBonus());
     }
 
     private float GetActiveBonus()

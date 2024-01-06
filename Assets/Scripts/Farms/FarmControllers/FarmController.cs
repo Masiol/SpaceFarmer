@@ -19,7 +19,7 @@ public class FarmController : MonoBehaviour, IFarmUnit
     public GameObject VisualPartAfterUnlock;
     public GameObject ScalableElementFarm;
 
-    [SerializeField] private FarmIncomePerLevel farmIncome;
+    [SerializeField] private FarmValuesPerLevel farmValues;
     private FarmProduce farmProduce;
     private FarmData data;
 
@@ -120,7 +120,7 @@ public class FarmController : MonoBehaviour, IFarmUnit
             FarmProduce farm = new FarmProduce();
             farm = farmProduce;
             farmProduce = gameObject.AddComponent<FarmProduce>();
-            farmProduce.Initialize(this, farmIndex, farmName, farmLevel, farmIncome);
+            farmProduce.Initialize(this, farmIndex, farmName, farmLevel, farmValues);
 
         }
     } 
@@ -145,7 +145,9 @@ public class FarmController : MonoBehaviour, IFarmUnit
             farm.farmLevel += 1;
         }
         this.farmLevel += 1;
-        GetComponent<FarmProduce>().UpgradeProduce();
+        price = farmValues.farmCostPerLevel[farmLevel];
+        GetComponentInChildren<FarmInfoUI>().UpgradeInfo();
+        //GetComponent<FarmProduce>().UpgradeProduce();
     }
    
 }

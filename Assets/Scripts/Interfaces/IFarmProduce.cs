@@ -4,6 +4,5 @@ using UnityEngine;
 
 public interface IFarmProduce
 {
-    public void Initialize(IFarmUnit farm, int farmID, string farmName, int farmlevel, FarmIncomePerLevel farmIncomePerLevel);
-    public void UpgradeProduce();
+    public void Initialize(IFarmUnit farm, int farmID, string farmName, int farmlevel, FarmValuesPerLevel farmValuesPerLevel);
 }
