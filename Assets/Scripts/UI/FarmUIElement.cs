@@ -25,11 +25,6 @@ public class FarmUIElement : MonoBehaviour
     private int currentFarmIndex;
     private FarmController farmController;
 
-    private void OnEnable()
-    {
-        StartCoroutine(CheckMoneyPeriodically());
-    }
-
     private void OnDisable()
     {
         StopCoroutine(CheckMoneyPeriodically());
@@ -47,7 +42,7 @@ public class FarmUIElement : MonoBehaviour
         currentFarmIndex = farmIndex;
         SetDataOnUI();
         upgradeButton.onClick.AddListener(UpgradeLogic);
-        CheckIfPlayerHasMoney();
+        StartCoroutine(CheckMoneyPeriodically());
     }
     private void SetDataOnUI()
     {
@@ -138,7 +133,7 @@ public class FarmUIElement : MonoBehaviour
     private void CheckIfPlayerHasMoney()
     {
         int i = PlayerMoneyManager.Instance.GetAmount();
-        if (i > farmController.GetPrice() && farmIsActive)
+        if (i >= farmController.GetPrice() && farmIsActive)
         {
             upgradeButton.interactable = true;
         }
