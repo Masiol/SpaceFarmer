@@ -8,6 +8,8 @@ TagManager:
   - Money
   - BonusBorder
   - BonusIcon
+  - FxTemporaire
+  - BackButton
   layers:
   - Default
   - TransparentFX

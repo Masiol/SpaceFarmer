@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 using System.Linq;
-
 public class FarmController : MonoBehaviour, IFarmUnit
+
 {
     public string farmName;
     public int farmIndex;
@@ -40,7 +40,7 @@ public class FarmController : MonoBehaviour, IFarmUnit
 
         if (isUnlocked)
         {
-           // InitializeFarmProduce();
+            // InitializeFarmProduce();
         }
 
     }
@@ -120,10 +120,10 @@ public class FarmController : MonoBehaviour, IFarmUnit
             FarmProduce farm = new FarmProduce();
             farm = farmProduce;
             farmProduce = gameObject.AddComponent<FarmProduce>();
-            farmProduce.Initialize(this, farmIndex, farmName, farmLevel, farmValues);
+            farmProduce.Initialize(this, farmIndex, farmName, farmValues);
 
         }
-    } 
+    }
     public int GetPrice()
     {
         return price;
@@ -137,13 +137,24 @@ public class FarmController : MonoBehaviour, IFarmUnit
     {
         return farmName;
     }
-    public void Upgrade()
+
+    public Sprite GetFarmIcon()
+    { 
+        return farmImage;  
+    }
+
+    public FarmValuesPerLevel farmValuesPerLevel()
+    {
+        return farmValues;
+    }
+    public void Upgrade(int amount)
     {
         FarmData farm = FarmManager.Instance.farms.FirstOrDefault(f => f.farmName == GetFarmName());
         if (farm != null)
         {
             farm.farmLevel += 1;
         }
+        PlayerMoneyManager.Instance.SetAmount(-amount);
         this.farmLevel += 1;
         price = farmValues.farmCostPerLevel[farmLevel];
         GetComponentInChildren<FarmInfoUI>().UpgradeInfo();

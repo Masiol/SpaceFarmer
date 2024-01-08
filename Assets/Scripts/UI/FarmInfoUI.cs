@@ -6,28 +6,26 @@ using TMPro;
 
 public class FarmInfoUI : MonoBehaviour
 {
-
     [SerializeField] private TextMeshProUGUI farmName;
     [SerializeField] private TextMeshProUGUI farmLevel;
     [SerializeField] private Image icon;
-     private int levelFarm;
-     private string nameFarm;
-     private string upgradeCost;
-
-
+    private int levelFarm;
+    private string nameFarm;
+    private string upgradeCost;
     private void Start()
     {
-        // icon = GetComponentInParent<FarmController>().GetFarmIcon();
+        Invoke("SetFarmInfo", 0.25f); 
+    }
+    private void SetFarmInfo()
+    {
         SetFarmName();
         SetFarmLevel();
     }
-
     public void UpgradeInfo()
     {
         SetFarmLevel();
     }
-
-    public void SetFarmName()
+    private void SetFarmName()
     {
         nameFarm = GetComponentInParent<FarmController>().GetFarmName();
         farmName.text = nameFarm;

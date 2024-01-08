@@ -15,7 +15,9 @@ public interface IFarmUnit
 
     int GetLevel();
 
+    Sprite GetFarmIcon();
+
     string GetFarmName();
 
-    void Upgrade();
+    void Upgrade(int amount);
 }

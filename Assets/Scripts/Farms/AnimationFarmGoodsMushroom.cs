@@ -99,4 +99,9 @@ public class AnimationFarmGoodsMushroom : MonoBehaviour, IParabolicMoveListener,
         else
             return 1;
     }
+
+    public FarmInfo FarmProduceInformations()
+    {
+        return farmInfo;
+    }
 }

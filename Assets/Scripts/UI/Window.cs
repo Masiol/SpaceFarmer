@@ -1,8 +1,12 @@
 using UnityEngine;
+using DG.Tweening;
 
 public class Window : MonoBehaviour, IObservableWindow
 {
     public float closeAnimationDuration = 1.0f;
+    public float openAnimationDuration = 1.0f;
+
+    public Ease ease;
 
     private BackManager backManager;
 
@@ -15,7 +19,7 @@ public class Window : MonoBehaviour, IObservableWindow
 
     public void OpenWindow()
     {
-        this.transform.localScale = Vector3.one;
+        this.transform.DOScale(Vector3.one, openAnimationDuration).SetEase(ease);
     }
 
     public void OnCloseWindow()
@@ -26,6 +30,10 @@ public class Window : MonoBehaviour, IObservableWindow
 
     private void CloseWindow()
     {
-        Destroy(gameObject);
+        this.transform.DOScale(Vector3.zero, openAnimationDuration).SetEase(ease).OnComplete(() =>
+        {
+            Destroy(gameObject);
+        });
+        
     }
 }

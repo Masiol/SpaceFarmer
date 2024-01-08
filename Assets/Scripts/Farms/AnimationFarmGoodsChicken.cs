@@ -76,5 +76,8 @@ public class AnimationFarmGoodsChicken : MonoBehaviour, IParabolicMoveListener, 
         return 1;
     }
 
-
+    public FarmInfo FarmProduceInformations()
+    {
+        return farmInfo;
+    }
 }
