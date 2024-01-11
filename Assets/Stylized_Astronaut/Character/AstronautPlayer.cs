@@ -14,8 +14,11 @@ public class AstronautPlayer : MonoBehaviour, IUnit
 
     public string currentFarmNameInteracting;
 
+    public MoneySpawner moneySpawner;
+
     void Start()
     {
+        moneySpawner = GetComponent<MoneySpawner>();
         controller = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
     }
@@ -72,5 +75,9 @@ public class AstronautPlayer : MonoBehaviour, IUnit
             farm.ExitInteractField();
             currentFarmNameInteracting = null;
         }
+    }
+    public void StartSpawnMoney(Transform EndPoint, string currentFarmName)
+    {
+        moneySpawner.StartSpawn(EndPoint, currentFarmName);
     }
 }

@@ -66,7 +66,7 @@ public class FarmController : MonoBehaviour, IFarmUnit
             int i = PlayerMoneyManager.Instance.GetAmount();
             if (i > price)
             {
-                PlayerFasade.instance.StartSpawnMoney(platformFarm.transform.GetChild(0), currentFarmName);
+                FindObjectOfType<AstronautPlayer>().StartSpawnMoney(platformFarm.transform.GetChild(0), currentFarmName);
             }
         }
         else

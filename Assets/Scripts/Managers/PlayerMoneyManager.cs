@@ -7,11 +7,9 @@ using TMPro;
 public class PlayerMoneyManager : MonoBehaviour
 {
     public static PlayerMoneyManager Instance { get; private set; }
-
-    public int startMoneyPlayer;
     private int playerMoneyAmount { get; set; }
 
-    public TextMeshProUGUI playerMoney;
+    PlayerUIManager playerUIManager;
 
     private void Awake()
     {
@@ -24,23 +22,15 @@ public class PlayerMoneyManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        playerUIManager = FindObjectOfType<PlayerUIManager>();
     }
-    private void Start()
-    {
-        SetAmount(startMoneyPlayer);
-    }
-
     public void SetAmount(int amount)
     {
         playerMoneyAmount += amount;
-        UpdateAmountVisual();
+        playerUIManager.UpdateAmountVisual(playerMoneyAmount);
     }
     public int GetAmount()
     {
         return playerMoneyAmount;
-    }
-    private void UpdateAmountVisual()
-    {
-        playerMoney.text = playerMoneyAmount.ToString();
     }
 }

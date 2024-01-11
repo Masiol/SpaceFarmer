@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bonus : MonoBehaviour
+public class Bonus
 {
     public Sprite BonusSprite { get; set; }
     public IMultiplierStrategy MultiplierStrategy { get; set; }
