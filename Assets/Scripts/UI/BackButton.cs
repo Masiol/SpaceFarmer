@@ -18,11 +18,11 @@ public class BackButton : MonoBehaviour
         Debug.Log(ListObservableCount);
         if (ListObservableCount > 0)
         {
-            transform.GetComponent<RectTransform>().DOAnchorPosX(-60, 0.25f);
+            transform.GetComponent<RectTransform>().DOAnchorPosX(-75, 0.25f);
         }
         else if (ListObservableCount == 0)
         {
-            transform.GetComponent<RectTransform>().DOAnchorPosX(120, 0.25f);
+            transform.GetComponent<RectTransform>().DOAnchorPosX(140, 0.25f);
         }
     }
 }

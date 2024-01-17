@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f978e2a65341041a6a116b503f9b0e, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  StartMoney: 700
+  startMoney: 700

@@ -6,5 +6,6 @@ using UnityEngine;
 
 public class GameData : ScriptableObject
 {
-    public int StartMoney;
+    [SerializeField] private int startMoney;
+    public int StartMoney => startMoney;
 }

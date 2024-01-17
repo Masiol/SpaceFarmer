@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 using System.Linq;
+using System.Threading.Tasks;
+
 public class FarmController : MonoBehaviour, IFarmUnit
 
 {
@@ -85,7 +87,7 @@ public class FarmController : MonoBehaviour, IFarmUnit
                 {
                     VisualPartAfterUnlock.gameObject.SetActive(true);
                     ScalableElementFarm.gameObject.SetActive(true);
-                    VisualPartToUnlock.gameObject.SetActive(false);
+                   // VisualPartToUnlock.gameObject.SetActive(false);
                 }
                 break;
             case FarmData.FarmState.Unlockable:
@@ -104,13 +106,36 @@ public class FarmController : MonoBehaviour, IFarmUnit
                 break;
         }
     }
-    public void Unlock()
+
+    public async Task Unlock()
     {
         FarmManager.Instance.farms[farmIndex].isUnlocked = true;
         FarmManager.Instance.farms[farmIndex].farmState = FarmData.FarmState.Unlocked;
         FarmManager.Instance.Initialize();
-        PlayerMoneyManager.Instance.SetAmount(-price);
+        PlayerMoneyManager.Instance.SetAmount(-price);     
         InitializeFarmProduce();
+        await WaitForAnimationCompletion();
+        GetComponentInChildren<VisualPartAfterUnlock>().StartAnimation();
+    }
+    private Task WaitForAnimationCompletion()
+    {
+        var completionSource = new TaskCompletionSource<object>();
+
+        // Uzyskaj dostêp do VisualPartToUnlock
+        var visualPart = GetComponentInChildren<VisualPartToUnlock>();
+
+        // Ustaw obs³ugê zakoñczenia animacji
+        visualPart.OnAnimationCompleted += () =>
+        {
+            // Oznacz zadanie jako zakoñczone
+            completionSource.SetResult(null);
+        };
+
+        // Uruchom animacjê
+        visualPart.StartAnimation();
+
+        // Zwróæ zadanie oczekuj¹ce na zakoñczenie animacji
+        return completionSource.Task;
     }
 
     private void InitializeFarmProduce()

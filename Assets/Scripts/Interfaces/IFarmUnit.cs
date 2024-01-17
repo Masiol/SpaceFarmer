@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public interface IFarmUnit
@@ -9,7 +10,7 @@ public interface IFarmUnit
 
     void UpdateFarmState();
 
-    void Unlock();
+    Task Unlock();
 
     int GetPrice();
 
