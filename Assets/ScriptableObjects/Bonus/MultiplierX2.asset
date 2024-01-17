@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c591a5760b510b74789c6394a48c9b9c, type: 3}
   m_Name: MultiplierX2
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: e5600378dd761e64d9423790c482bf36, type: 3}
+  sprite: {fileID: 21300000, guid: eca4027c5f5796d47bf2627a54bdac22, type: 3}
+  SetFasterProduce: 0
   SetMultiplier: 0
   SetBonusType: 0
   duration: 15
