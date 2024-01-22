@@ -8,6 +8,7 @@ public class FarmData
     public string farmName;
     public int farmLevel;
     public int farmIndex;
+    public Sprite farmIcon;
     public int price;
     public bool isUnlocked;
 
@@ -61,24 +62,25 @@ public class FarmManager : MonoBehaviour
         }
     }
     private IFarm CreateFarmFromData(FarmData data)
+    {
+        IFarm farm = null;
+        switch (data.farmIndex)
         {
-            IFarm farm = null;
-            switch (data.farmIndex)
-            {
-                case 0:
-                    farm = new MushroomFarm(data);
-                    break;
-                case 1:
-                    farm = new ChickenFarm(data);
-                    break;
-                case 2:
-                    farm = new TomatoFarm(data);
-                    break;
-                case 3:
-                    farm = new CowFarm(data);
-                    break;
+            case 0:
+                farm = new MushroomFarm(data);
+                break;
+            case 1:
+                farm = new ChickenFarm(data);
+                break;
+            case 2:
+                farm = new TomatoFarm(data);
+                break;
+            case 3:
+                farm = new CowFarm(data);
+                break;
 
-            }
-            return farm;
         }
+        return farm;
     }
+}
+

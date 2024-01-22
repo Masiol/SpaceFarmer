@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Unity.Collections;
 using UnityEngine;
 
 public class AnimationFarmGoodsMushroom : MonoBehaviour, IParabolicMoveListener, IFarmBehaviour
@@ -12,6 +13,8 @@ public class AnimationFarmGoodsMushroom : MonoBehaviour, IParabolicMoveListener,
     [SerializeField] private Transform endPoint;
     [SerializeField] private int maxFarmGoodsCount;
     private int currentGoodsFarmFloatingToDestinationPoint;
+
+    public float currentProductionSpeed;
 
     public void StartProcess()
     {
@@ -44,8 +47,10 @@ public class AnimationFarmGoodsMushroom : MonoBehaviour, IParabolicMoveListener,
     private IEnumerator ScaleCoroutine()
     {
         float elapsedTime = 0f;
-        float duration = farmInfo.timeScaleDuration * GetActiveBonus();
-        Debug.Log(farmInfo.timeScaleDuration * GetActiveBonus());
+        float duration = farmInfo.timeScaleDuration 
+            * ValueFromActiveBonus.instance.GetActiveBonusProduceFaster() 
+            / ValueFromActiveBonus.instance.BonusFromStructureForFasterProduce();
+        currentProductionSpeed = duration;
 
         while (elapsedTime < duration)
         {
@@ -63,10 +68,9 @@ public class AnimationFarmGoodsMushroom : MonoBehaviour, IParabolicMoveListener,
             itemsToScale[i].localScale = Vector3.zero;
         }
 
-        //Debug.Log("Scaling Complete!");
-
-        yield return new WaitForSeconds(farmInfo.timeBetweenNextScale * GetActiveBonus());
-      //  Debug.Log(farmInfo.timeBetweenNextScale * GetActiveBonus());
+        yield return new WaitForSeconds(farmInfo.timeBetweenNextScale 
+            * ValueFromActiveBonus.instance.GetActiveBonusProduceFaster() 
+            / ValueFromActiveBonus.instance.BonusFromStructureForFasterProduce());
 
         StartCoroutine(ScaleCoroutine());
     }
@@ -88,16 +92,6 @@ public class AnimationFarmGoodsMushroom : MonoBehaviour, IParabolicMoveListener,
             currentGoodsFarmFloatingToDestinationPoint = 0;
         }
 
-    }
-    private float GetActiveBonus()
-    {
-        ActiveBonus activeBonus = FindObjectOfType<ActiveBonus>();
-        if (activeBonus != null)
-        {
-            return 1 - (float)FasterProduceHelper.GetPercentage(activeBonus.GetFasterProduce());
-        }
-        else
-            return 1;
     }
 
     public FarmInfo FarmProduceInformations()

@@ -54,13 +54,17 @@ public class ChickenBehaviour : MonoBehaviour
     bool canSpawn = true;
     private IEnumerator LayEgg(float waitTime)
     {
-        yield return new WaitForSeconds(waitTime * animationFarmGoodsChicken.GetActiveBonus());
+        yield return new WaitForSeconds(waitTime 
+            * ValueFromActiveBonus.instance.BonusFromStructureForFasterProduce() 
+            * ValueFromActiveBonus.instance.GetActiveBonusProduceFaster());
         while (canSpawn)
         {
             var go = Instantiate(Egg, spawnEggPosition.position, Quaternion.identity);
             animationFarmGoodsChicken.AddEggToList(go);
 
-            yield return new WaitForSeconds(waitTime * animationFarmGoodsChicken.GetActiveBonus());
+            yield return new WaitForSeconds(waitTime 
+                * ValueFromActiveBonus.instance.BonusFromStructureForFasterProduce() 
+                * ValueFromActiveBonus.instance.GetActiveBonusProduceFaster());
         }
     }
 }

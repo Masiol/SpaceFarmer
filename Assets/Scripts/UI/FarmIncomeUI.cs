@@ -14,11 +14,11 @@ public class FarmIncomeUI : MonoBehaviour
         Debug.Log("Initialize");
         UI_TextIncome = Resources.Load<GameObject>("UI/UI_TextIncome");
     }
-    public void StartAnimation(int income)
+    public void StartAnimation(float income)
     {
         SpawnTextMeshPro(startSpawnPointVisualIncomeEffect.position, income);
     }
-    private void SpawnTextMeshPro(Vector3 position, int income)
+    private void SpawnTextMeshPro(Vector3 position, float income)
     {
         var go = Instantiate(UI_TextIncome, position, Quaternion.identity);
         go.transform.position = position;

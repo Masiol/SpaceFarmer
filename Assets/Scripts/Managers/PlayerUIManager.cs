@@ -7,7 +7,7 @@ using TMPro;
 public class PlayerUIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI playerMoney;
-    public void UpdateAmountVisual(int playerMoneyAmount)
+    public void UpdateAmountVisual(float playerMoneyAmount)
     {
         playerMoney.text = playerMoneyAmount.ToString();
     }

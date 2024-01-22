@@ -6,15 +6,15 @@ using System.Linq;
 using System.Threading.Tasks;
 
 public class FarmController : MonoBehaviour, IFarmUnit
-
 {
-    public string farmName;
-    public int farmIndex;
-    public int farmLevel;
-    public Sprite farmImage;
+    private string farmName;
+    private int farmIndex;
+    private int farmLevel;
+    private Sprite farmImage;
     public int price { get; private set; }
+    [HideInInspector]
     public bool isUnlocked;
-    public FarmData.FarmState FarmState;
+    private FarmData.FarmState FarmState;
     public GameObject platformFarm;
     [Space]
     public GameObject VisualPartToUnlock;
@@ -30,14 +30,15 @@ public class FarmController : MonoBehaviour, IFarmUnit
         this.data = data;
     }
 
-    public void Initialize(string _name, int _index, int _level, int _price, bool _isUnlocked, FarmData.FarmState state)
+    public void Initialize(string _name, int _index, int _level, Sprite _farmImage, int _price, bool _isUnlocked, FarmData.FarmState _state)
     {
         farmName = _name;
         farmIndex = _index;
         farmLevel = _level;
+        farmImage = _farmImage;
         price = _price;
         isUnlocked = _isUnlocked;
-        FarmState = state;
+        FarmState = _state;
         UpdateFarmState();
 
         if (isUnlocked)
@@ -65,7 +66,7 @@ public class FarmController : MonoBehaviour, IFarmUnit
         }
         else if (FarmState == FarmData.FarmState.Unlockable)
         {
-            int i = PlayerMoneyManager.Instance.GetAmount();
+            float i = PlayerMoneyManager.Instance.GetAmount();
             if (i > price)
             {
                 FindObjectOfType<AstronautPlayer>().StartSpawnMoney(platformFarm.transform.GetChild(0), currentFarmName);
@@ -149,6 +150,10 @@ public class FarmController : MonoBehaviour, IFarmUnit
 
         }
     }
+    public int GetFarmIndex()
+    {
+        return farmIndex;
+    }
     public int GetPrice()
     {
         return price;
@@ -183,7 +188,6 @@ public class FarmController : MonoBehaviour, IFarmUnit
         this.farmLevel += 1;
         price = farmValues.farmCostPerLevel[farmLevel];
         GetComponentInChildren<FarmInfoUI>().UpgradeInfo();
-        //GetComponent<FarmProduce>().UpgradeProduce();
     }
    
 }
