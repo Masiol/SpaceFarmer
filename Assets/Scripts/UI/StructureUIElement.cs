@@ -95,7 +95,10 @@ public class StructureUIElement : MonoBehaviour
         }
         else if (structureController.GetStructureTypeBonus() == StructureData.StructureType.Increase_Production)
         {
-            return structureController.GetStructureValuesPerLevel().StructureIncreasePerLevel[structureController.GetStructureLevel() - 1].ToString() + "%";
+            float value = structureController.GetStructureValuesPerLevel().StructureIncreasePerLevel[structureController.GetStructureLevel() - 1];
+            float percentage = (value * 100) - 100;
+            int roundedPercentage = Mathf.RoundToInt(percentage);
+            return roundedPercentage.ToString() + "%";
         }
         else
             return "";

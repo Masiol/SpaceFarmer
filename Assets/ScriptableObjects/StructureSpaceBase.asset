@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: StructureSpaceBase
   m_EditorClassIdentifier: 
   StructureIncreasePerLevel:
-  - 0
+  - 1
+  - 1.1
+  - 1.2
+  - 1.5
+  - 1.8
+  - 2
   - 3
+  - 4
   - 5
-  - 10
-  - 15
-  - 20
-  - 25
-  - 30
-  - 35
-  - 45
-  StructureCostPerLevel: 0000000058020000b00400006c070000740e0000901a0000e02e00000064000000fa0000b0ad0100
+  - 6
+  StructureCostPerLevel: 0000000058020000b00400006c070000740e0000901a0000e02e0000a861000000fa0000b0ad0100

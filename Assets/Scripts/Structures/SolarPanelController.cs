@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class SolarPanelController : StructureControllerBase<StructureData>, IStructureController
 {
-    public StructureValuesPerLevel structureValuesPerLevel;
-    public GameObject ScalableStructureElement;
+    [SerializeField] private StructureValuesPerLevel structureValuesPerLevel;
+    [SerializeField] private GameObject ScalableStructureElement;
 
-    public List<int> LevelToScaleNextObject;
+    [SerializeField] private List<int> LevelToScaleNextObject;
 
     public float GetValuesBonus()
     {
@@ -62,8 +62,7 @@ public class SolarPanelController : StructureControllerBase<StructureData>, IStr
     }
 
     public void BuildStructure()
-    {
-
+    { 
         if (LevelToScaleNextObject.Contains(structureLevel))
         {
             int scaleIndex = LevelToScaleNextObject.IndexOf(structureLevel);

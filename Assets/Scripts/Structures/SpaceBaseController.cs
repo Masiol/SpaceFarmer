@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[System.Serializable]
+public class LevelScalePair
+{
+    public int level;
+    public Vector3 scale;
+}
+
 public class SpaceBaseController : StructureControllerBase<StructureData>, IStructureController
 {
-    public StructureValuesPerLevel structureValuesPerLevel;
+    [SerializeField] private StructureValuesPerLevel structureValuesPerLevel;
+    [SerializeField] private GameObject ScalableStructureElement;  
+    [SerializeField] private List<LevelScalePair> levelScalePairs;
+
     public float GetValuesBonus()
     {
-        Debug.Log(structureValuesPerLevel.StructureIncreasePerLevel[structureLevel - 1]);
         return structureValuesPerLevel.StructureIncreasePerLevel[structureLevel - 1];
-
     }
     public int GetStructureIndex()
     {
@@ -42,6 +50,7 @@ public class SpaceBaseController : StructureControllerBase<StructureData>, IStru
     }
     public void Upgrade(int amount)
     {
+        BuildStructure();
         StructureData structure = StructureManager.Instance.structures.FirstOrDefault(s => s.structureName == GetStructureName());
         if (structure != null)
         {
@@ -59,6 +68,16 @@ public class SpaceBaseController : StructureControllerBase<StructureData>, IStru
 
     public void BuildStructure()
     {
-        throw new System.NotImplementedException();
+        LevelScalePair pair = levelScalePairs.Find(item => item.level == structureLevel);
+        if (pair != null)
+        {
+            Vector3 scale = pair.scale;
+            ScalableStructureElement.SetActive(true);
+            ScalableStructureElement.GetComponent<RescaleStructure>().RescaleSingle(scale);
+        }
+        else
+        {
+            Debug.LogWarning($"Brak skali dla poziomu {structureLevel}.");
+        }
     }
 }

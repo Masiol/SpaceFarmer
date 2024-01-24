@@ -3,10 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[System.Serializable]
+public class LevelSpeedPair
+{
+    public int level;
+    public float speed;
+}
 public class SpaceRoverController : StructureControllerBase<StructureData>, IStructureController
 {
 
-    public StructureValuesPerLevel structureValuesPerLevel;
+    [SerializeField] private StructureValuesPerLevel structureValuesPerLevel;
+    [SerializeField] private GameObject ScalableStructureElement;
+    [SerializeField] private List<LevelSpeedPair> levelSpeedPair;
 
     public float GetValuesBonus()
     {
@@ -42,6 +50,7 @@ public class SpaceRoverController : StructureControllerBase<StructureData>, IStr
     }
     public void Upgrade(int amount)
     {
+        BuildStructure();
         StructureData structure = StructureManager.Instance.structures.FirstOrDefault(s => s.structureName == GetStructureName());
         if (structure != null)
         {
@@ -58,6 +67,19 @@ public class SpaceRoverController : StructureControllerBase<StructureData>, IStr
 
     public void BuildStructure()
     {
-        throw new System.NotImplementedException();
+        if (ScalableStructureElement.activeSelf != true)
+        {
+            ScalableStructureElement.SetActive(true);
+        }
+        LevelSpeedPair pair = levelSpeedPair.Find(item => item.level == structureLevel);
+        if (pair != null)
+        {
+            float speed = pair.speed;         
+            ScalableStructureElement.GetComponent<SpaceRoverMovement>().StartMovement(speed);
+        }
+        else
+        {
+            Debug.LogWarning($"Brak skali dla poziomu {structureLevel}.");
+        }
     }
 }

@@ -11,6 +11,15 @@ public class RescaleStructure : MonoBehaviour
 
     [SerializeField] private GameObject[] elements;
     [SerializeField] private GameObject element;
+    [SerializeField] private bool doOnStart;
+
+    private void Start()
+    {
+        if(doOnStart)
+        {
+            RescaleSingle(Vector3.one);
+        }
+    }
 
     public void RescaleMultiple(int index)
     {
