@@ -8,6 +8,11 @@ Simple prototype android game.
 
 ### Game
 
+![Image 2](https://drive.google.com/uc?export=view&id=1ZT4cU0OGMnclM_a9caNNSknUavL9sYdj)
+
+
+### Free Building
+
 ![Image 2](https://drive.google.com/uc?export=view&id=1_9VmkqTwJJt5QntQZnrLE1W27CR6-LyE)
 
 
