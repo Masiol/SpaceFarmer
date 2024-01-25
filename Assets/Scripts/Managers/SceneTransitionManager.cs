@@ -10,7 +10,6 @@ public class SceneTransitionManager : MonoBehaviour
 
     [SerializeField] private RectTransform leftImage;
     [SerializeField] private RectTransform rightImage;
-    [SerializeField] private RectTransform Logo;
     [SerializeField] private float transitionTime = 1.0f;
     private float screenWidth;
     private const float TransitionWaitTime = 1.75f;
@@ -28,7 +27,7 @@ public class SceneTransitionManager : MonoBehaviour
             return; // Exit early if duplicate
         }
 
-        screenWidth = Screen.width / 2;
+        screenWidth = Screen.width / 1.5f;
         SetStartImagesPosition();
     }
     private void SetStartImagesPosition()

@@ -27,6 +27,7 @@ public class PlayerMoneyManager : MonoBehaviour
     public void SetAmount(float amount)
     {
         playerMoneyAmount += amount;
+        if (playerMoneyAmount < 0) playerMoneyAmount = 0;
         playerUIManager.UpdateAmountVisual(playerMoneyAmount);
     }
     public float GetAmount()
