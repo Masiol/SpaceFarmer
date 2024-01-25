@@ -20,6 +20,7 @@ public class FarmInfoUI : MonoBehaviour
     {
         SetFarmName();
         SetFarmLevel();
+        SetFarmIcon();
     }
     public void UpgradeInfo()
     {
@@ -34,6 +35,10 @@ public class FarmInfoUI : MonoBehaviour
     {
         levelFarm = GetComponentInParent<FarmController>().GetLevel();
         farmLevel.text = "Level: " + levelFarm.ToString();
+    }
+    private void SetFarmIcon()
+    {
+        icon.sprite = GetComponentInParent<FarmController>().GetFarmIcon();
     }
 
 }

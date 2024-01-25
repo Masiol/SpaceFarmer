@@ -14,6 +14,7 @@ public class Window : MonoBehaviour, IObservableWindow
     {
         backManager = BackManager.instance;
         this.transform.localScale = Vector3.zero;
+        
         OpenWindow();
     }
 

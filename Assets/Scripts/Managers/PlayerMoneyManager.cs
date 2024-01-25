@@ -7,7 +7,7 @@ using TMPro;
 public class PlayerMoneyManager : MonoBehaviour
 {
     public static PlayerMoneyManager Instance { get; private set; }
-    private int playerMoneyAmount { get; set; }
+    private float playerMoneyAmount { get; set; }
 
     PlayerUIManager playerUIManager;
 
@@ -24,12 +24,13 @@ public class PlayerMoneyManager : MonoBehaviour
         }
         playerUIManager = FindObjectOfType<PlayerUIManager>();
     }
-    public void SetAmount(int amount)
+    public void SetAmount(float amount)
     {
         playerMoneyAmount += amount;
+        if (playerMoneyAmount < 0) playerMoneyAmount = 0;
         playerUIManager.UpdateAmountVisual(playerMoneyAmount);
     }
-    public int GetAmount()
+    public float GetAmount()
     {
         return playerMoneyAmount;
     }

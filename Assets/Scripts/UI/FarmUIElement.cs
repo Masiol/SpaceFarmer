@@ -20,7 +20,6 @@ public class FarmUIElement : MonoBehaviour
     public TextMeshProUGUI price;
     private string priceString;
     [SerializeField] private Button upgradeButton;
-    private bool farmIsActive;
 
     private int currentFarmIndex;
     private FarmController farmController;
@@ -50,7 +49,7 @@ public class FarmUIElement : MonoBehaviour
 
         foreach (FarmController controller in farmControllers)
         {
-            if (controller.farmIndex == currentFarmIndex)
+            if (controller.GetFarmIndex() == currentFarmIndex)
             {
                 farmController = controller;
                 break;
@@ -77,29 +76,12 @@ public class FarmUIElement : MonoBehaviour
             //Debug.Log(timeScaleDuration);
             float timeBetweenNextSpawnObjects = farmController.GetComponentInChildren<IFarmBehaviour>().FarmProduceInformations().timeBetweenNextSpawnObjects;
             // Debug.Log(timeBetweenNextSpawnObjects);
-            SetFarmState(true);
             return farmController.farmValuesPerLevel().farmIncomePerLevel[farmController.GetLevel()] +" /"+ FarmProduceValidate(timeBetweenNextScale, timeScaleDuration, timeBetweenNextSpawnObjects).ToString() +"s";
         }
         else
         {
-            SetFarmState(false);
             return "1/1";
         }
-    }
-
-    private void SetFarmState(bool state)
-    {
-        Debug.Log(state);
-        farmIsActive = state;
-        if (!state)
-        {
-            transform.GetChild(0).GetComponent<Image>().color = Color.gray;
-        }
-        else
-        {
-            transform.GetChild(0).GetComponent<Image>().color = Color.white;
-        }
-
     }
 
     private float FarmProduceValidate(float TBNS, float TSD, float TBNSO)
@@ -117,7 +99,6 @@ public class FarmUIElement : MonoBehaviour
     private void UpgradeLogic()
     {
         farmController.Upgrade(farmController.GetPrice());
-
         UIUpdate();
         CheckIfPlayerHasMoney();
     }
@@ -132,12 +113,22 @@ public class FarmUIElement : MonoBehaviour
 
     private void CheckIfPlayerHasMoney()
     {
-        int i = PlayerMoneyManager.Instance.GetAmount();
-        if (i >= farmController.GetPrice() && farmIsActive)
+        float i = PlayerMoneyManager.Instance.GetAmount();
+        if (i >= farmController.GetPrice() && FarmIsActive())
         {
             upgradeButton.interactable = true;
         }
         else
             upgradeButton.interactable = false;
+    }
+
+    private bool FarmIsActive()
+    {
+        if (farmController.isUnlocked)
+        {
+            return true;
+        }
+        else
+            return false;
     }
 }

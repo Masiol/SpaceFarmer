@@ -17,4 +17,4 @@ MonoBehaviour:
   SetMultiplier: 0
   SetBonusType: 1
   duration: 15
-  prefab: {fileID: 8329419154611042494, guid: 6cebf4f664776204cba0517a9eda191e, type: 3}
+  prefab: {fileID: 3402734046078266727, guid: 4b5642bbae0ab44e998e9c54951bd180, type: 3}
