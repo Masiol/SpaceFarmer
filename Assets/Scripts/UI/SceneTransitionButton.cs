@@ -6,7 +6,7 @@ public class SceneTransitionButton : MonoBehaviour
 {
     public string targetSceneName;
 
-    public void Start()
+    private void Start()
     {
         Button button = GetComponent<Button>();
         if (button != null)

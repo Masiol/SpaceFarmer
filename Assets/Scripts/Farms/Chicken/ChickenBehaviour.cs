@@ -4,8 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 
 public class ChickenBehaviour : MonoBehaviour
-{
-   
+{ 
     public Transform spawnEggPosition; 
     
     [SerializeField] private GameObject Egg; 

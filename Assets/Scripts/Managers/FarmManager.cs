@@ -36,6 +36,11 @@ public class FarmManager : MonoBehaviour
     {
         Initialize();
     }  
+    public void Initialize()
+    {
+        SetStateFarms();
+        InitializeFarms(farms);
+    } 
     private void InitializeFarms(List<FarmData> farms)
     {
         foreach (FarmData farm in farms)
@@ -43,6 +48,12 @@ public class FarmManager : MonoBehaviour
             IFarm ifarm = CreateFarmFromData(farm);
         }
     }
+  
+    public void SetStateFarms()
+    {
+        FarmStateController farmStateController = new FarmStateController();
+        farmStateController.SetState();
+    } 
     private IFarm CreateFarmFromData(FarmData data)
     {
         IFarm farm = null;
@@ -64,15 +75,6 @@ public class FarmManager : MonoBehaviour
         }
         return farm;
     }
-    public void Initialize()
-    {
-        SetStateFarms();
-        InitializeFarms(farms);
-    }
-    public void SetStateFarms()
-    {
-        FarmStateController farmStateController = new FarmStateController();
-        farmStateController.SetState();
-    } 
+    
 }
 

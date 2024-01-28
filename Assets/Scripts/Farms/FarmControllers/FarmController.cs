@@ -47,7 +47,8 @@ public class FarmController : MonoBehaviour, IFarmUnit
         {
             // InitializeFarmProduce();
         }
-    } public void Interact(string currentFarmName)
+    } 
+    public void Interact(string currentFarmName)
     {
         if (FarmState == FarmData.FarmState.Unlocked)
         {

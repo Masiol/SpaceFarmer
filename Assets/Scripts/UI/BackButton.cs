@@ -15,7 +15,6 @@ public class BackButton : MonoBehaviour
     }
     public void ManageButton(int ListObservableCount)
     {
-        //Debug.Log(ListObservableCount);
         if (ListObservableCount > 0)
         {
             transform.GetComponent<RectTransform>().DOAnchorPosX(-75, 0.25f);

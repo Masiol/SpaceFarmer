@@ -13,6 +13,10 @@ public class MoneySpawner : MonoBehaviour, IParabolicMoveListener
     {
         endPoint = endpoint;
         StartCoroutine(SpawnMoneyRoutine(currentFarmName));
+    } 
+    public void OnParabolicMoveComplete()
+    {
+        return;
     }
     private IEnumerator SpawnMoneyRoutine(string currentFarmName)
     {
@@ -32,8 +36,5 @@ public class MoneySpawner : MonoBehaviour, IParabolicMoveListener
         go.GetComponent<ParabolicMove>().MoveOnParabola(transform, endPoint, this);
     }
 
-    public void OnParabolicMoveComplete()
-    {
-        return;
-    }
+  
 }

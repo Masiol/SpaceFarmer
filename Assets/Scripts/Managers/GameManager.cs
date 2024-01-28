@@ -5,14 +5,22 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public GameData gameData;
-
+    [SerializeField] private GameData gameData;
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     private void Start()
     {
         PlayerMoneyManager.Instance.SetAmount(gameData.StartMoney);
     }
 }
+    

@@ -80,7 +80,7 @@ public class StructureUIElement : MonoBehaviour
         price.text = priceString;
     }
 
-    public string StringHelper()
+    private string StringHelper()
     {
         if (structureController.GetStructureTypeBonus() == StructureData.StructureType.Afk_Income)
         {

@@ -4,12 +4,12 @@ public class RotateObjectToCamera : MonoBehaviour
 {
     private Camera mainCamera;
 
-    void Start()
+    private void Start()
     {
         mainCamera = Camera.main;
     }
 
-    void Update()
+    private void Update()
     {
         if (mainCamera != null)
         {

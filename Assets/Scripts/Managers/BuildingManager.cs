@@ -34,6 +34,15 @@ public class BuildingManager : MonoBehaviour
                 MoveObjectWithMouse();
             }
         }
+    }  
+    public void StartPlacing(int index)
+    {
+        if (currentObject != null)
+        {
+            Destroy(currentObject);
+        }
+        currentObject = Instantiate(objects[index]);
+        isPlacing = true;
     }
 
     private void UpdateMaterial()
@@ -56,13 +65,5 @@ public class BuildingManager : MonoBehaviour
         currentObject = null;
     }
 
-    public void StartPlacing(int index)
-    {
-        if (currentObject != null)
-        {
-            Destroy(currentObject);
-        }
-        currentObject = Instantiate(objects[index]);
-        isPlacing = true;
-    }
+  
 }

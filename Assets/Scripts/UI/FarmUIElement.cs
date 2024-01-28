@@ -27,15 +27,7 @@ public class FarmUIElement : MonoBehaviour
     private void OnDisable()
     {
         StopCoroutine(CheckMoneyPeriodically());
-    }
-    private IEnumerator CheckMoneyPeriodically()
-    {
-        while (gameObject.activeSelf) // Sprawdza, czy obiekt jest aktywny
-        {
-            CheckIfPlayerHasMoney();
-            yield return new WaitForSeconds(1f); // Czekaj 1 sekundê przed kolejnym sprawdzeniem
-        }
-    }
+    } 
     public void SetCurrentFarmIndexAndInitialize(int farmIndex)
     {
         currentFarmIndex = farmIndex;
@@ -43,6 +35,14 @@ public class FarmUIElement : MonoBehaviour
         upgradeButton.onClick.AddListener(UpgradeLogic);
         StartCoroutine(CheckMoneyPeriodically());
     }
+    private IEnumerator CheckMoneyPeriodically()
+    {
+        while (gameObject.activeSelf)
+        {
+            CheckIfPlayerHasMoney();
+            yield return new WaitForSeconds(1f);
+        }
+    }  
     private void SetDataOnUI()
     {
         FarmController[] farmControllers = FindObjectsOfType<FarmController>();
@@ -55,7 +55,6 @@ public class FarmUIElement : MonoBehaviour
                 break;
             }
         }
-
         if (farmController != null)
         {
             iconFarm.sprite = farmController.GetFarmIcon();
@@ -64,18 +63,14 @@ public class FarmUIElement : MonoBehaviour
             UIUpdate();
         }
     }
-
     private string FarmProduceStringBuild()
     {
         IFarmBehaviour farmBehaviour = farmController.GetComponentInChildren<IFarmBehaviour>() as IFarmBehaviour;
         if (farmBehaviour != null && ((MonoBehaviour)farmBehaviour).gameObject.activeSelf)
         {
             float timeBetweenNextScale = farmController.GetComponentInChildren<IFarmBehaviour>().FarmProduceInformations().timeBetweenNextScale;
-            //Debug.Log(timeBetweenNextScale);
             float timeScaleDuration = farmController.GetComponentInChildren<IFarmBehaviour>().FarmProduceInformations().timeScaleDuration;
-            //Debug.Log(timeScaleDuration);
             float timeBetweenNextSpawnObjects = farmController.GetComponentInChildren<IFarmBehaviour>().FarmProduceInformations().timeBetweenNextSpawnObjects;
-            // Debug.Log(timeBetweenNextSpawnObjects);
             return farmController.farmValuesPerLevel().farmIncomePerLevel[farmController.GetLevel()] +" /"+ FarmProduceValidate(timeBetweenNextScale, timeScaleDuration, timeBetweenNextSpawnObjects).ToString() +"s";
         }
         else
@@ -95,7 +90,6 @@ public class FarmUIElement : MonoBehaviour
             return TBNS + TSD;
         }
     }
-
     private void UpgradeLogic()
     {
         farmController.Upgrade(farmController.GetPrice());
@@ -110,7 +104,6 @@ public class FarmUIElement : MonoBehaviour
         price.text = priceString;
         farmProduce.text = FarmProduceStringBuild();
     }
-
     private void CheckIfPlayerHasMoney()
     {
         float i = PlayerMoneyManager.Instance.GetAmount();
@@ -121,7 +114,6 @@ public class FarmUIElement : MonoBehaviour
         else
             upgradeButton.interactable = false;
     }
-
     private bool FarmIsActive()
     {
         if (farmController.isUnlocked)

@@ -25,6 +25,11 @@ public class BuildingPlacer : MonoBehaviour
         {
             HandleInput();
         }
+    }  
+    public void SetBuildingPrefab(GameObject prefab)
+    {
+        _buildingPrefab = prefab;
+        _isPlacingBuilding = true;
     }
 
     private void HandleInput()
@@ -87,11 +92,7 @@ public class BuildingPlacer : MonoBehaviour
         }
     }
 
-    public void SetBuildingPrefab(GameObject prefab)
-    {
-        _buildingPrefab = prefab;
-        _isPlacingBuilding = true;
-    }
+  
 
     
 }

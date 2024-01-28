@@ -10,7 +10,7 @@ public class RescaleElement : MonoBehaviour
     [SerializeField] private float animTime;
     [SerializeField] private Ease ease;
 
-    void Start()
+    private void Start()
     {
         transform.DOScale(destScale, animTime)
            .SetEase(ease).OnComplete(() =>
@@ -19,5 +19,4 @@ public class RescaleElement : MonoBehaviour
                    GetComponentInChildren<IFarmBehaviour>().StartProcess();
            });
     }
-
 }

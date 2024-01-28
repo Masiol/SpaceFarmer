@@ -21,7 +21,7 @@ public class ParabolicMove : MonoBehaviour
             });
     }
 
-    Vector3[] CalculateParabolaPoints(Vector3 start, Vector3 end, float height, float interval)
+    private Vector3[] CalculateParabolaPoints(Vector3 start, Vector3 end, float height, float interval)
     {
         int numberOfPoints = Mathf.CeilToInt(1f / interval);
         Vector3[] points = new Vector3[numberOfPoints + 1];

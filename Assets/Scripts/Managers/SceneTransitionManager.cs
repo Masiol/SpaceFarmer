@@ -29,6 +29,10 @@ public class SceneTransitionManager : MonoBehaviour
 
         screenWidth = Screen.width / 1.5f;
         SetStartImagesPosition();
+    } 
+    public void TransitionToScene(string sceneName)
+    {
+        StartCoroutine(TransitionCoroutine(sceneName));
     }
     private void SetStartImagesPosition()
     {
@@ -68,10 +72,7 @@ public class SceneTransitionManager : MonoBehaviour
         SetImagePosition(leftImage, -screenWidth, transitionTime);    
         yield return new WaitForSeconds(TransitionWaitTime);
     }
-    public void TransitionToScene(string sceneName)
-    {
-        StartCoroutine(TransitionCoroutine(sceneName));
-    }
+   
 
     
     

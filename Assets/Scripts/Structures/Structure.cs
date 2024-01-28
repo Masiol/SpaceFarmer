@@ -8,11 +8,10 @@ public class Structure : IStructure
 
     public int StructureLevel { get; protected set; }
 
-    public int StructureIndex { get; protected set; }
+    public int StructureIndex { get; protected set; }    
+    public int StructurePrice { get; protected set; }
 
     public Sprite StructureSprite { get; protected set; }
-
-    public int StructurePrice { get; protected set; }
 
     public bool StructureIsUnlocked { get; protected set; }
 
