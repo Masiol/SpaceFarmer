@@ -15,33 +15,13 @@ public class AnimationFarmGoodsMushroom : MonoBehaviour, IParabolicMoveListener,
     private int currentGoodsFarmFloatingToDestinationPoint;
 
     public float currentProductionSpeed;
-
-    public void StartProcess()
-    {
-        PrefabItem = farmInfo.scalableItemPrefab;
-        InitializeList();
-        SpawnElements();
-        maxFarmGoodsCount = HoldersFarmItem.Count;
-        StartCoroutine(ScaleCoroutine());
-    }
+  
     private void InitializeList()
     {
         for (int i = 0; i < this.transform.childCount; i++)
         {
             Transform holder = transform.GetChild(i);
             HoldersFarmItem.Add(holder);
-        }
-    }
-    public void SpawnElements()
-    {
-        for (int i = 0; i < HoldersFarmItem.Count; i++)
-        {
-            var go = Instantiate(PrefabItem, HoldersFarmItem[i].transform.position, Quaternion.identity);
-            go.transform.localScale = Vector3.zero;
-            go.transform.parent = HoldersFarmItem[i];
-            go.transform.localPosition = Vector3.zero;
-           
-            itemsToScale.Add(go.transform);
         }
     }
     private IEnumerator ScaleCoroutine()
@@ -74,7 +54,27 @@ public class AnimationFarmGoodsMushroom : MonoBehaviour, IParabolicMoveListener,
 
         StartCoroutine(ScaleCoroutine());
     }
+    public void StartProcess()
+    {
+        PrefabItem = farmInfo.scalableItemPrefab;
+        InitializeList();
+        SpawnElements();
+        maxFarmGoodsCount = HoldersFarmItem.Count;
+        StartCoroutine(ScaleCoroutine());
+    }
   
+    public void SpawnElements()
+    {
+        for (int i = 0; i < HoldersFarmItem.Count; i++)
+        {
+            var go = Instantiate(PrefabItem, HoldersFarmItem[i].transform.position, Quaternion.identity);
+            go.transform.localScale = Vector3.zero;
+            go.transform.parent = HoldersFarmItem[i];
+            go.transform.localPosition = Vector3.zero;
+           
+            itemsToScale.Add(go.transform);
+        }
+    } 
     public void FloatingToPoint(Transform item)
     {
         var go = Instantiate(item, item.transform.position, Quaternion.identity);
@@ -82,7 +82,6 @@ public class AnimationFarmGoodsMushroom : MonoBehaviour, IParabolicMoveListener,
         go.gameObject.AddComponent<ParabolicMove>();
         go.GetComponent<ParabolicMove>().MoveOnParabola(item, endPoint, this);
     }
-
     public void OnParabolicMoveComplete()
     {
         currentGoodsFarmFloatingToDestinationPoint++;
@@ -93,7 +92,6 @@ public class AnimationFarmGoodsMushroom : MonoBehaviour, IParabolicMoveListener,
         }
 
     }
-
     public FarmInfo FarmProduceInformations()
     {
         return farmInfo;

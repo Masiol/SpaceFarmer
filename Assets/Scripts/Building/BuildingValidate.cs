@@ -12,14 +12,13 @@ public enum PlacementMode
 public class BuildingValidate : MonoBehaviour
 {
     public Material validPlacementMaterial;
-    public Material invalidPlacementMaterial;
-
-    public MeshRenderer[] meshComponents;
-    private Dictionary<MeshRenderer, List<Material>> initialMaterials;
+    public Material invalidPlacementMaterial;    
+    public MeshRenderer[] meshComponents; 
 
     [HideInInspector] public bool hasValidPlacement;
     [HideInInspector] public bool isFixed;
 
+    private Dictionary<MeshRenderer, List<Material>> initialMaterials;
     private int _nObstacles;
 
     private void Awake()
@@ -31,6 +30,16 @@ public class BuildingValidate : MonoBehaviour
         _InitializeMaterials();
     }
 
+    
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        _InitializeMaterials();
+    }
+#endif
+
+  
     private void OnTriggerEnter(Collider other)
     {
         if (isFixed) return;
@@ -52,15 +61,27 @@ public class BuildingValidate : MonoBehaviour
         _nObstacles--;
         if (_nObstacles == 0)
             SetPlacementMode(PlacementMode.Valid);
-    }
-
-#if UNITY_EDITOR
-    private void OnValidate()
+    } 
+    
+    private void _InitializeMaterials()
     {
-        _InitializeMaterials();
-    }
-#endif
+        if (initialMaterials == null)
+            initialMaterials = new Dictionary<MeshRenderer, List<Material>>();
+        if (initialMaterials.Count > 0)
+        {
+            foreach (var l in initialMaterials) l.Value.Clear();
+            initialMaterials.Clear();
+        }
 
+        foreach (MeshRenderer r in meshComponents)
+        {
+            initialMaterials[r] = new List<Material>(r.sharedMaterials);
+        }
+    }
+    private bool _IsGround(GameObject o)
+    {
+        return ((1 << o.layer) & BuildingPlacer.instance.groundLayerMask.value) != 0;
+    }
     public void SetPlacementMode(PlacementMode mode)
     {
         if (mode == PlacementMode.Fixed)
@@ -103,25 +124,7 @@ public class BuildingValidate : MonoBehaviour
         }
     }
 
-    private void _InitializeMaterials()
-    {
-        if (initialMaterials == null)
-            initialMaterials = new Dictionary<MeshRenderer, List<Material>>();
-        if (initialMaterials.Count > 0)
-        {
-            foreach (var l in initialMaterials) l.Value.Clear();
-            initialMaterials.Clear();
-        }
+    
 
-        foreach (MeshRenderer r in meshComponents)
-        {
-            initialMaterials[r] = new List<Material>(r.sharedMaterials);
-        }
-    }
-
-    private bool _IsGround(GameObject o)
-    {
-        return ((1 << o.layer) & BuildingPlacer.instance.groundLayerMask.value) != 0;
-    }
-
+  
 }

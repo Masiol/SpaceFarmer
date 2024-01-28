@@ -75,13 +75,6 @@ public class BuildingPlacer : MonoBehaviour
             }
         }
     }
-
-    public void SetBuildingPrefab(GameObject prefab)
-    {
-        _buildingPrefab = prefab;
-        _isPlacingBuilding = true;
-    }
-
     private void _PrepareBuilding(Vector3 position)
     {
         _toBuild = Instantiate(_buildingPrefab, position, Quaternion.identity);
@@ -93,4 +86,12 @@ public class BuildingPlacer : MonoBehaviour
             validator.SetPlacementMode(PlacementMode.Valid);
         }
     }
+
+    public void SetBuildingPrefab(GameObject prefab)
+    {
+        _buildingPrefab = prefab;
+        _isPlacingBuilding = true;
+    }
+
+    
 }

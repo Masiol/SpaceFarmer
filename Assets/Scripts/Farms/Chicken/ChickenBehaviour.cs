@@ -5,14 +5,18 @@ using DG.Tweening;
 
 public class ChickenBehaviour : MonoBehaviour
 {
-    private Animator animator;
-    private float eatCooldown = 5f; // Czas pomiêdzy jedzeniem
-    private float eatTimer = 0f;
-    public GameObject Egg;
-    public Transform spawnEggPosition;
-    AnimationFarmGoodsChicken animationFarmGoodsChicken;
+   
+    public Transform spawnEggPosition; 
+    
+    [SerializeField] private GameObject Egg; 
 
-    void Start()
+    private float eatCooldown = 5f; 
+    private float eatTimer = 0f;
+    private bool canSpawn = true;
+    private Animator animator;
+    AnimationFarmGoodsChicken animationFarmGoodsChicken;
+    
+    private void Start()
     {
         animator = GetComponent<Animator>();
         eatTimer = Random.Range(0f, eatCooldown);
@@ -23,18 +27,8 @@ public class ChickenBehaviour : MonoBehaviour
         SetChickenRotateToPlayer();
         ScaleChicken(maxScale);
         StartCoroutine(LayEgg(timeToNextLayEgg));
-    }
-
-    private void ScaleChicken(Vector3 scale)
-    {
-        this.transform.DOScale(scale, 0.5f).SetEase(Ease.InOutSine);
-    }
-    private void SetChickenRotateToPlayer()
-    {
-        transform.LookAt(GameObject.FindGameObjectWithTag("Player").transform);
-    }
-
-    void Update()
+    }   
+    private void Update()
     {
         eatTimer -= Time.deltaTime;
         if (eatTimer <= 0f)
@@ -51,7 +45,14 @@ public class ChickenBehaviour : MonoBehaviour
         }
     }
 
-    bool canSpawn = true;
+    private void ScaleChicken(Vector3 scale)
+    {
+        this.transform.DOScale(scale, 0.5f).SetEase(Ease.InOutSine);
+    }
+    private void SetChickenRotateToPlayer()
+    {
+        transform.LookAt(GameObject.FindGameObjectWithTag("Player").transform);
+    }
     private IEnumerator LayEgg(float waitTime)
     {
         yield return new WaitForSeconds(waitTime

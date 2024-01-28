@@ -31,7 +31,6 @@ public class BuildingManager : MonoBehaviour
             }
             else
             {
-                // Kiedy obiekt nie jest umieszczany, przesuwamy go za kursorem myszy
                 MoveObjectWithMouse();
             }
         }
@@ -53,7 +52,6 @@ public class BuildingManager : MonoBehaviour
 
     private void PlaceObject()
     {
-        // Odczepiamy obiekt od kursora i umieszczamy go na ziemi
         isPlacing = false;
         currentObject = null;
     }
@@ -64,8 +62,6 @@ public class BuildingManager : MonoBehaviour
         {
             Destroy(currentObject);
         }
-
-        // Tworzymy nowy obiekt i przyklejamy go do kursora myszy
         currentObject = Instantiate(objects[index]);
         isPlacing = true;
     }

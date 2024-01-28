@@ -9,11 +9,10 @@ public class Farm : IFarm
     public int FarmLevel { get; protected set; }
 
     public int FarmIndex { get; protected set; }
+    public int Price { get; protected set; }
 
     public Sprite FarmIcon { get; protected set; }
     
-    public int Price { get; protected set; }
-
     public bool IsUnlocked { get; protected set; }
     public FarmData.FarmState FarmState { get; protected set; }
 

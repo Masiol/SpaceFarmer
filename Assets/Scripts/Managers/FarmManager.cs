@@ -31,25 +31,11 @@ public class FarmManager : MonoBehaviour
         {
             Instance = this;
         }
-
     }
-
     private void Start()
     {
         Initialize();
-    }
-
-    public void Initialize()
-    {
-        SetStateFarms();
-        InitializeFarms(farms);
-    }
-
-    public void SetStateFarms()
-    {
-        FarmStateController farmStateController = new FarmStateController();
-        farmStateController.SetState();
-    }
+    }  
     private void InitializeFarms(List<FarmData> farms)
     {
         foreach (FarmData farm in farms)
@@ -78,5 +64,15 @@ public class FarmManager : MonoBehaviour
         }
         return farm;
     }
+    public void Initialize()
+    {
+        SetStateFarms();
+        InitializeFarms(farms);
+    }
+    public void SetStateFarms()
+    {
+        FarmStateController farmStateController = new FarmStateController();
+        farmStateController.SetState();
+    } 
 }
 

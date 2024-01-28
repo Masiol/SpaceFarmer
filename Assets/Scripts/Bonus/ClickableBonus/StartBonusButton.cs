@@ -6,19 +6,17 @@ using UnityEngine.UI;
 public class StartBonusButton : MonoBehaviour
 {
     public List<BonusData> bonusData = new List<BonusData>();
-    BonusManager bonusManager;
     public Button adButton;
 
+    private BonusManager bonusManager;
     private void Start()
     {
         bonusManager = FindObjectOfType<BonusManager>();
         adButton.gameObject.SetActive(true);
         adButton.onClick.AddListener(SetBonus);
     }
-
     private void SetBonus()
     {
-        //BonusManager bonusManager = new BonusManager();
         bonusManager.CreateBonus(bonusData[1]);
     }
 }

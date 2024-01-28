@@ -5,17 +5,17 @@ using UnityEngine;
 public interface IStructureController
 {
     int GetStructureIndex();
+    int GetStructurePrice();
+    int GetStructureLevel();
+
     Sprite GetStructureIcon();
     string GetStructureName();
 
-    int GetStructurePrice();
-
-    int GetStructureLevel();
-    StructureData.StructureType GetStructureTypeBonus();
+    
+    StructureData.StructureType GetStructureTypeBonus(); 
+    StructureValuesPerLevel GetStructureValuesPerLevel();
 
     void Upgrade(int amount);
-
-    StructureValuesPerLevel GetStructureValuesPerLevel();
 
     void BuildStructure();
 }

@@ -9695,7 +9695,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1242720516}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -14668,6 +14668,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fae3450957fd5429c144dcfade2ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Eggs: []
+  maxEggCount: 4
   chickenSpawnPoint:
   - {fileID: 188904842}
   - {fileID: 339290521}
@@ -14676,8 +14678,6 @@ MonoBehaviour:
   chickenPrefab: {fileID: 1311290861401530, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
   endPoint: {fileID: 767016373}
   farmInfo: {fileID: 11400000, guid: e831b5fe694593f44bce5117e4efd164, type: 2}
-  Eggs: []
-  maxEggCount: 4
 --- !u!1001 &1766548093
 PrefabInstance:
   m_ObjectHideFlags: 0

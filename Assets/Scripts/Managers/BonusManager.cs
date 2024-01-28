@@ -21,7 +21,6 @@ public class BonusManager : MonoBehaviour
         {
             bonusBuilder.SetFasterProduce(bonusdata.SetFasterProduce);
         }
-
         CreatedBonus = bonusBuilder.Build();
         GameObject bonusObject = Instantiate(bonusdata.prefab, Vector3.zero, Quaternion.identity);
         bonusObject.AddComponent<GameObjectBonus>();

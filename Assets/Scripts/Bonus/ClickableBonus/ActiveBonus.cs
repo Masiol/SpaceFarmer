@@ -12,9 +12,8 @@ public class ActiveBonus : MonoBehaviour
     private bool startCounting;
     private string childBorderImageTag = "BonusBorder";
     private string childMainImageTag = "BonusIcon";
-    private Bonus activeBonus;
-
-    public void Initialize(Bonus bonus)
+    private Bonus activeBonus;  
+     public void Initialize(Bonus bonus)
     {
         bonusBorderImage = FindChildWithTag(childBorderImageTag);
         mainBonusSprite = FindChildWithTag(childMainImageTag);
@@ -30,19 +29,6 @@ public class ActiveBonus : MonoBehaviour
         bonusBorderImage.fillMethod = Image.FillMethod.Radial360;
         bonusBorderImage.fillAmount = 1f; // Start with a full circle
     }
-
-    private Image FindChildWithTag(string tag)
-    {
-        foreach(Transform child in transform)
-        {
-            if(child.CompareTag(tag))
-            {
-                return child.GetComponent<Image>();
-            }
-        }
-        return null;
-    }
-
     private void Update()
     {
         if (startCounting)
@@ -62,6 +48,20 @@ public class ActiveBonus : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+    }
+
+   
+
+    private Image FindChildWithTag(string tag)
+    {
+        foreach(Transform child in transform)
+        {
+            if(child.CompareTag(tag))
+            {
+                return child.GetComponent<Image>();
+            }
+        }
+        return null;
     }
 
     public float GetCurrentMultiplier()

@@ -4,14 +4,16 @@ using Unity.Collections;
 using UnityEngine;
 
 public class FarmProduce: MonoBehaviour, IFarmProduce
-{
-    private IFarmUnit farmUnit;
+{ 
+
+    public int currentFarmProduce;   
+    
     [SerializeField] private int farmID;
     [SerializeField] private string farmName;
-    private int farmLevel;
-    public int currentFarmProduce;
-    private FarmValuesPerLevel farmValuesPerLevel;
 
+    private IFarmUnit farmUnit; 
+    private int farmLevel; 
+    private FarmValuesPerLevel farmValuesPerLevel;
     public void Initialize(IFarmUnit _farm, int _farmID, string _farmName, FarmValuesPerLevel _farmValuesPerLevel)
     {
         farmUnit = _farm;
@@ -20,7 +22,6 @@ public class FarmProduce: MonoBehaviour, IFarmProduce
         farmValuesPerLevel = _farmValuesPerLevel;
         gameObject.GetComponent<FarmIncomeUI>().Initialize();
     }
-
     public void Income()
     {
         currentFarmProduce += farmValuesPerLevel.farmIncomePerLevel[GetComponentInParent<FarmController>().GetLevel()];

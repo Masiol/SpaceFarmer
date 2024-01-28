@@ -11,9 +11,9 @@ public class SceneTransitionManager : MonoBehaviour
     [SerializeField] private RectTransform leftImage;
     [SerializeField] private RectTransform rightImage;
     [SerializeField] private float transitionTime = 1.0f;
+
     private float screenWidth;
     private const float TransitionWaitTime = 1.75f;
-
     private void Awake()
     {
         if (Instance == null)
@@ -43,11 +43,6 @@ public class SceneTransitionManager : MonoBehaviour
         DOTween.To(() => image.offsetMin.x, x => image.offsetMin = new Vector2(x, image.offsetMin.y), offsetX, duration)
             .SetEase(Ease.InQuad);
     }
-    public void TransitionToScene(string sceneName)
-    {
-        StartCoroutine(TransitionCoroutine(sceneName));
-    }
-
     private IEnumerator TransitionCoroutine(string sceneName)
     {
         yield return StartCoroutine(FadeIn());
@@ -61,18 +56,23 @@ public class SceneTransitionManager : MonoBehaviour
 
         yield return StartCoroutine(FadeOut());
     }
-
     private IEnumerator FadeIn()
     {
         SetImagePosition(rightImage, 0, transitionTime);
         SetImagePosition(leftImage, 0, transitionTime);
         yield return new WaitForSeconds(TransitionWaitTime);
     }
-
     private IEnumerator FadeOut()
     {
         SetImagePosition(rightImage, screenWidth, transitionTime);
         SetImagePosition(leftImage, -screenWidth, transitionTime);    
         yield return new WaitForSeconds(TransitionWaitTime);
     }
+    public void TransitionToScene(string sceneName)
+    {
+        StartCoroutine(TransitionCoroutine(sceneName));
+    }
+
+    
+    
 }

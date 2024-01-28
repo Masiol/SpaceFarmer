@@ -5,20 +5,13 @@ using UnityEngine;
 
 public interface IFarmUnit
 {
+    int GetPrice();
+    int GetLevel();
+    Sprite GetFarmIcon();
+    string GetFarmName();
     void Interact(string currentFarmName);
     void ExitInteractField();
-
     void UpdateFarmState();
-
-    Task Unlock();
-
-    int GetPrice();
-
-    int GetLevel();
-
-    Sprite GetFarmIcon();
-
-    string GetFarmName();
-
     void Upgrade(int amount);
+    Task Unlock();   
 }

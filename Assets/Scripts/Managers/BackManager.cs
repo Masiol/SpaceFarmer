@@ -5,6 +5,7 @@ using UnityEngine;
 public class BackManager : MonoBehaviour, IBackManager
 {
     public static BackManager instance;
+
     private BackButton backButton;
     private List<IObservableWindow> observableWindows = new List<IObservableWindow>();
 
@@ -22,13 +23,11 @@ public class BackManager : MonoBehaviour, IBackManager
         }
         backButton.ManageButton(observableWindows.Count);
     }
-
     public void UnregisterWindow(IObservableWindow observable)
     {
         if(observableWindows.Contains(observable))
         {
-            observableWindows.Remove(observable);
-           
+            observableWindows.Remove(observable);          
         } 
         backButton.ManageButton(observableWindows.Count);
     } 
@@ -40,7 +39,6 @@ public class BackManager : MonoBehaviour, IBackManager
             {
                 lastObserver.OnCloseWindow();
             }
-
         }
     }
 }

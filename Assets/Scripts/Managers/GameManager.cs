@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
     }
-
     private void Start()
     {
         PlayerMoneyManager.Instance.SetAmount(gameData.StartMoney);

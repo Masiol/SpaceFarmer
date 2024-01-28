@@ -18,7 +18,7 @@ public class GameObjectBonus : MonoBehaviour
         StartCoroutine(StartMoveBonusObject(duration));
     }
 
-    IEnumerator StartMoveBonusObject(float time)
+    private IEnumerator StartMoveBonusObject(float time)
     {
         //landingParticle.GetComponent<ParticleSystem>().Play();
         this.transform.DOMoveY(-18, 3.5f).SetEase(Ease.OutCirc).OnComplete(()=>

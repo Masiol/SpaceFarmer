@@ -25,7 +25,6 @@ public class StructureManager : MonoBehaviour
 {
     public static StructureManager Instance;
     public List<StructureData> structures = new List<StructureData>();
-
     private void Awake()
     {
         Instance = this;
