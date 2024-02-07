@@ -24,7 +24,7 @@ public class FarmController : MonoBehaviour, IFarmUnit
     private FarmData.FarmState FarmState;
     private FarmProduce farmProduce;
     private FarmData data;
-    
+
     private void OnEnable()
     {
         Actions.MoneyFinishedAction += MoneyFinishedHandler;
@@ -47,7 +47,7 @@ public class FarmController : MonoBehaviour, IFarmUnit
         {
             // InitializeFarmProduce();
         }
-    } 
+    }
     public void Interact(string currentFarmName)
     {
         if (FarmState == FarmData.FarmState.Unlocked)
@@ -77,7 +77,7 @@ public class FarmController : MonoBehaviour, IFarmUnit
                 {
                     VisualPartAfterUnlock.gameObject.SetActive(true);
                     ScalableElementFarm.gameObject.SetActive(true);
-                   // VisualPartToUnlock.gameObject.SetActive(false);
+                    // VisualPartToUnlock.gameObject.SetActive(false);
                 }
                 break;
             case FarmData.FarmState.Unlockable:
@@ -101,11 +101,22 @@ public class FarmController : MonoBehaviour, IFarmUnit
         FarmManager.Instance.farms[farmIndex].isUnlocked = true;
         FarmManager.Instance.farms[farmIndex].farmState = FarmData.FarmState.Unlocked;
         FarmManager.Instance.Initialize();
-        PlayerMoneyManager.Instance.SetAmount(-price);     
+        PlayerMoneyManager.Instance.SetAmount(-price);
         InitializeFarmProduce();
         await WaitForAnimationCompletion();
         GetComponentInChildren<VisualPartAfterUnlock>().StartAnimation();
-    }  
+    }
+    private void InitializeFarmProduce()
+    {
+        if (farmProduce == null)
+        {
+            FarmProduce farm = new FarmProduce();
+            farm = farmProduce;
+            farmProduce = gameObject.AddComponent<FarmProduce>();
+            farmProduce.Initialize(this, farmIndex, farmName, farmValues);
+        }
+    }
+
     public int GetFarmIndex()
     {
         return farmIndex;
@@ -125,8 +136,8 @@ public class FarmController : MonoBehaviour, IFarmUnit
     }
 
     public Sprite GetFarmIcon()
-    { 
-        return farmImage;  
+    {
+        return farmImage;
     }
 
     public FarmValuesPerLevel farmValuesPerLevel()
@@ -145,7 +156,7 @@ public class FarmController : MonoBehaviour, IFarmUnit
         price = farmValues.farmCostPerLevel[farmLevel];
         GetComponentInChildren<FarmInfoUI>().UpgradeInfo();
     }
-  
+
 
     private void MoneyFinishedHandler(string currentFarmName)
     {
@@ -153,7 +164,7 @@ public class FarmController : MonoBehaviour, IFarmUnit
         {
             Unlock();
         }
-    } 
+    }
     private Task WaitForAnimationCompletion()
     {
         var completionSource = new TaskCompletionSource<object>();
@@ -165,14 +176,5 @@ public class FarmController : MonoBehaviour, IFarmUnit
         visualPart.StartAnimation();
         return completionSource.Task;
     }
-    private void InitializeFarmProduce()
-    {
-        if (farmProduce == null)
-        {
-            FarmProduce farm = new FarmProduce();
-            farm = farmProduce;
-            farmProduce = gameObject.AddComponent<FarmProduce>();
-            farmProduce.Initialize(this, farmIndex, farmName, farmValues);
-        }
-    }  
 }
+   

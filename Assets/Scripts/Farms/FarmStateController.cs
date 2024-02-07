@@ -9,19 +9,7 @@ public class FarmStateController
     {
         farmManager = GameObject.FindObjectOfType<FarmManager>();
         SetFarmState();
-    }
-    public int GetHighestUnlockedIndexFarm()
-    {
-        int highest = -1;
-        for (int i = 0; i < farmManager.farms.Count; i++)
-        {
-            if (farmManager.farms[i].farmState == FarmData.FarmState.Unlocked)
-            {
-                highest++;
-            }
-        }
-        return highest;
-    }
+    }   
     private void SetFarmState()
     {
         List<FarmData> farms = farmManager.farms;
@@ -44,6 +32,19 @@ public class FarmStateController
                 farm.farmState = FarmData.FarmState.Locked;
             }
         }
-    }   
+    } 
+    public int GetHighestUnlockedIndexFarm()
+    {
+        int highest = -1;
+        for (int i = 0; i < farmManager.farms.Count; i++)
+        {
+            if (farmManager.farms[i].farmState == FarmData.FarmState.Unlocked)
+            {
+                highest++;
+            }
+        }
+        return highest;
+    }
+   
 }
 

@@ -14,14 +14,6 @@ public class AnimationFarmGoodsChicken : MonoBehaviour, IParabolicMoveListener, 
 
     private int currentGoodsFarmFloatingToDestinationPoint;
 
-    private void CheckEggCount()
-    {
-        for (int i = 0; i < Eggs.Count; i++)
-        {
-            FloatingToPoint(Eggs[i].transform);
-            Eggs.RemoveAt(i);
-        }
-    }
     public void StartProcess()
     {
         SpawnElements();
@@ -55,6 +47,14 @@ public class AnimationFarmGoodsChicken : MonoBehaviour, IParabolicMoveListener, 
     {
         Eggs.Add(egg);
         CheckEggCount();
+    }
+    private void CheckEggCount()
+    {
+        for (int i = 0; i < Eggs.Count; i++)
+        {
+            FloatingToPoint(Eggs[i].transform);
+            Eggs.RemoveAt(i);
+        }
     }
     public FarmInfo GetFarmInfo()
     {

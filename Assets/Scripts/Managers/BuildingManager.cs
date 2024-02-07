@@ -34,7 +34,24 @@ public class BuildingManager : MonoBehaviour
                 MoveObjectWithMouse();
             }
         }
+    }    
+    private void PlaceObject()
+    {
+        isPlacing = false;
+        currentObject = null;
     }  
+    private void UpdateMaterial()
+    {
+        currentObject.GetComponent<MeshRenderer>().material = canPlace ? correctMaterial : wrongMaterial;
+    } 
+    private void MoveObjectWithMouse()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, 1000, layerMask))
+        {
+            currentObject.transform.position = hit.point;
+        }
+    }
     public void StartPlacing(int index)
     {
         if (currentObject != null)
@@ -44,26 +61,4 @@ public class BuildingManager : MonoBehaviour
         currentObject = Instantiate(objects[index]);
         isPlacing = true;
     }
-
-    private void UpdateMaterial()
-    {
-        currentObject.GetComponent<MeshRenderer>().material = canPlace ? correctMaterial : wrongMaterial;
-    }
-
-    private void MoveObjectWithMouse()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, 1000, layerMask))
-        {
-            currentObject.transform.position = hit.point;
-        }
-    }
-
-    private void PlaceObject()
-    {
-        isPlacing = false;
-        currentObject = null;
-    }
-
-  
 }

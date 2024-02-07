@@ -44,13 +44,14 @@ public class ChickenBehaviour : MonoBehaviour
         }
     }
 
-    private void ScaleChicken(Vector3 scale)
-    {
-        this.transform.DOScale(scale, 0.5f).SetEase(Ease.InOutSine);
-    }
+   
     private void SetChickenRotateToPlayer()
     {
         transform.LookAt(GameObject.FindGameObjectWithTag("Player").transform);
+    } 
+    private void ScaleChicken(Vector3 scale)
+    {
+        this.transform.DOScale(scale, 0.5f).SetEase(Ease.InOutSine);
     }
     private IEnumerator LayEgg(float waitTime)
     {

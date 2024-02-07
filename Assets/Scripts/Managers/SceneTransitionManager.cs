@@ -29,17 +29,12 @@ public class SceneTransitionManager : MonoBehaviour
 
         screenWidth = Screen.width / 1.5f;
         SetStartImagesPosition();
-    } 
-    public void TransitionToScene(string sceneName)
-    {
-        StartCoroutine(TransitionCoroutine(sceneName));
-    }
+    }  
     private void SetStartImagesPosition()
     {
         SetImagePosition(leftImage, -screenWidth, 0);
         SetImagePosition(rightImage, screenWidth, 0);
-    }
-
+    }   
     private void SetImagePosition(RectTransform image, float offsetX, float duration)
     {
         DOTween.To(() => image.offsetMax.x, x => image.offsetMax = new Vector2(x, image.offsetMax.y), offsetX, duration)
@@ -47,6 +42,11 @@ public class SceneTransitionManager : MonoBehaviour
         DOTween.To(() => image.offsetMin.x, x => image.offsetMin = new Vector2(x, image.offsetMin.y), offsetX, duration)
             .SetEase(Ease.InQuad);
     }
+    public void TransitionToScene(string sceneName)
+    {
+        StartCoroutine(TransitionCoroutine(sceneName));
+    }
+   
     private IEnumerator TransitionCoroutine(string sceneName)
     {
         yield return StartCoroutine(FadeIn());
